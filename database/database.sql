@@ -74,15 +74,17 @@ CREATE TABLE Reviews (
 INSERT INTO Users (name, username, password, email, role) VALUES
 ('Alice Johnson', 'alicej', 'hashedpassword1', 'alice@example.com', 'client'),
 ('Bob Smith', 'bobsmith', 'hashedpassword2', 'bob@example.com', 'freelancer'),
-('Charlie Brown', 'charlieadmin', 'hashedpassword3', 'charlie@example.com', 'admin');
+('Charlie Brown', 'charlieadmin', 'hashedpassword3', 'charlie@example.com', 'admin'),
+('Peter Parker', 'notSpiderman', 'ilovemj', 'ihatejjj@example.com', 'freelancer');
 
 -- Insert categories
-INSERT INTO Categories (name) VALUES ('Web Development'), ('Graphic Design'), ('Writing'), ('Marketing');
+INSERT INTO Categories (name) VALUES ('Web Development'), ('Graphic Design'), ('Writing'), ('Marketing'), ('Photography');
 
 -- Insert services
 INSERT INTO Services (user_id, category_id, title, description, price, delivery_time) VALUES
 (1, 1, 'Build a responsive website', 'I will create a fully responsive website.', 500.00, 7),
-(2, 2, 'Logo Design', 'I will design a unique logo for your brand.', 100.00, 3);
+(2, 2, 'Logo Design', 'I will design a unique logo for your brand.', 100.00, 3),
+(4, 5, 'Spider Man Photos', 'Amazing photo of Spiderman saving the day!', '3000', 3);
 
 -- Insert transactions
 INSERT INTO Transactions (client_id, freelancer_id, service_id, status) VALUES
