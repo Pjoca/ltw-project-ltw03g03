@@ -1,88 +1,100 @@
-CREATE TABLE UserType (
-    id SERIAL PRIMARY KEY,
-    type_name VARCHAR(50) UNIQUE NOT NULL
-);
+-- Drop tables if they exist to avoid conflicts
+DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS Categories;
+DROP TABLE IF EXISTS Services;
+DROP TABLE IF EXISTS Transactions;
+DROP TABLE IF EXISTS Messages;
+DROP TABLE IF EXISTS Reviews;
+
+PRAGMA foreign_keys = ON;
 
 CREATE TABLE Users (
-    id SERIAL PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    pass VARCHAR(255) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    user_type_id INT NOT NULL,
-    FOREIGN KEY (user_type_id) REFERENCES UserType(id) ON DELETE CASCADE
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    username TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    role TEXT CHECK(role IN ('client','freelancer', 'admin')) DEFAULT 'client',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE Service (
-    id SERIAL PRIMARY KEY,
-    val DECIMAL(10,2) NOT NULL,
-    img VARCHAR(255),
-    category VARCHAR(100) NOT NULL,
-    tempo INT NOT NULL, -- Time in minutes or hours
-    descript TEXT,
-    stat VARCHAR(50) CHECK (stat IN ('active', 'inactive', 'pending')) NOT NULL
+CREATE TABLE Services (
+    id INTEGER PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    category_id INTEGER NOT NULL,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    price REAL NOT NULL,
+    delivery_time INTEGER NOT NULL,
+    media TEXT, -- images/videos
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Categories (
+    id INTEGER PRIMARY KEY,
+    name TEXT UNIQUE NOT NULL
+);
+
+CREATE TABLE Transactions (
+    id INTEGER PRIMARY KEY,
+    client_id INTEGER NOT NULL,
+    freelancer_id INTEGER NOT NULL,
+    service_id INTEGER NOT NULL,
+    status TEXT CHECK(status IN ('pending', 'completed', 'cancelled')) DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (client_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (freelancer_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (service_id) REFERENCES services(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE Messages (
+    id INTEGER PRIMARY KEY,
+    sender_id INTEGER NOT NULL,
+    receiver_id INTEGER NOT NULL,
+    message TEXT NOT NULL,
+    sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (sender_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (receiver_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Reviews (
-    id SERIAL PRIMARY KEY,
-    rating INT CHECK (rating BETWEEN 1 AND 5) NOT NULL,
-    msg TEXT,
-    sender_id INT NOT NULL,
-    reader_id INT NOT NULL,
-    FOREIGN KEY (sender_id) REFERENCES Users(id) ON DELETE CASCADE,
-    FOREIGN KEY (reader_id) REFERENCES Users(id) ON DELETE CASCADE
-);
-
-CREATE TABLE Messages (
-    id SERIAL PRIMARY KEY,
-    content TEXT NOT NULL,
-    sender_id INT NOT NULL,
-    receiver_id INT NOT NULL,
-    tempo TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (sender_id) REFERENCES Users(id) ON DELETE CASCADE,
-    FOREIGN KEY (receiver_id) REFERENCES Users(id) ON DELETE CASCADE
-);
-
-CREATE TABLE Checkout (
-    id SERIAL PRIMARY KEY,
-    service_id INT NOT NULL,
-    user_id INT NOT NULL,
-    total_amount DECIMAL(10,2) NOT NULL,
-    stat VARCHAR(50) CHECK (stat IN ('pending', 'completed', 'canceled')) NOT NULL,
-    payment_method VARCHAR(50) NOT NULL,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    transaction_id INTEGER NOT NULL,
+    rating INTEGER CHECK(rating BETWEEN 1 AND 5),
+    comment TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (service_id) REFERENCES Service(id) ON DELETE CASCADE,
-    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
+    FOREIGN KEY (transaction_id) REFERENCES transactions(id) ON DELETE CASCADE
 );
 
 
+-- Insert users
+INSERT INTO Users (name, username, password, email, role) VALUES
+('Alice Johnson', 'alicej', 'hashedpassword1', 'alice@example.com', 'client'),
+('Bob Smith', 'bobsmith', 'hashedpassword2', 'bob@example.com', 'freelancer'),
+('Charlie Brown', 'charlieadmin', 'hashedpassword3', 'charlie@example.com', 'admin');
 
--- Populating UserType
-INSERT INTO UserType (type_name) VALUES ('Freelancer'), ('Client'), ('Admin');
+-- Insert categories
+INSERT INTO Categories (name) VALUES ('Web Development'), ('Graphic Design'), ('Writing'), ('Marketing');
 
--- Populating Users
-INSERT INTO Users (nome, pass, email, user_type_id) VALUES
-('Alice Smith', 'password123', 'alice@example.com', 1),
-('Bob Johnson', 'securepass', 'bob@example.com', 2),
-('Charlie Admin', 'adminpass', 'charlie@example.com', 3);
+-- Insert services
+INSERT INTO Services (user_id, category_id, title, description, price, delivery_time) VALUES
+(1, 1, 'Build a responsive website', 'I will create a fully responsive website.', 500.00, 7),
+(2, 2, 'Logo Design', 'I will design a unique logo for your brand.', 100.00, 3);
 
--- Populating Service
-INSERT INTO Service (val, img, category, tempo, descript, stat) VALUES
-(50.00, 'service1.jpg', 'Design', 120, 'Graphic design service', 'active'),
-(30.00, 'service2.jpg', 'Writing', 90, 'Content writing service', 'active'),
-(100.00, 'service3.jpg', 'Programming', 180, 'Full-stack development', 'pending');
+-- Insert transactions
+INSERT INTO Transactions (client_id, freelancer_id, service_id, status) VALUES
+(2, 1, 1, 'pending'),
+(1, 2, 2, 'completed');
 
--- Populating Reviews
-INSERT INTO Reviews (rating, msg, sender_id, reader_id) VALUES
-(5, 'Great service!', 2, 1),
-(4, 'Good job, but can improve.', 1, 2);
+-- Insert messages
+INSERT INTO Messages (sender_id, receiver_id, message) VALUES
+(1, 2, 'Hi, I would like to hire you for a website project.'),
+(2, 1, 'Sure, let me know the details.');
 
--- Populating Messages
-INSERT INTO Messages (content, sender_id, receiver_id) VALUES
-('Hello, I am interested in your service.', 2, 1),
-('Thanks for your interest! Let’s discuss details.', 1, 2);
-
--- Populating Checkout
-INSERT INTO Checkout (service_id, user_id, total_amount, stat, payment_method) VALUES
-(1, 2, 50.00, 'completed', 'Credit Card'),
-(2, 1, 30.00, 'pending', 'PayPal');
+-- Insert reviews
+INSERT INTO Reviews (transaction_id, rating, comment) VALUES
+(2, 5, 'Great logo design, highly recommended!');
 
