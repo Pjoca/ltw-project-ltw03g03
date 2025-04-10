@@ -1,0 +1,20 @@
+body {
+    max-width: 40em;
+    margin: 0 auto;
+  }
+  
+  section {
+    display: flex;
+    flex-wrap: wrap;
+  
+    gap: 1em;
+  
+    article {
+      flex-grow: 1;
+      padding: 1em;
+  
+      border: 1px solid crimson;
+      background-color: darkred;
+      color: white;
+    }
+  }
