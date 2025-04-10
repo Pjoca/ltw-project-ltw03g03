@@ -5,3 +5,11 @@
     - Pessoa 1
     - Pessoa 2
     - Pessoa 3
+
+## Run Project
+
+ In the main folder run
+
+ ```
+ php -S localhost:9000
+ ```
