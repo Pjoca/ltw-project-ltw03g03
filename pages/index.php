@@ -12,7 +12,6 @@ if (!is_logged_in()) {
 
 
 draw_header("Welcome");
-echo "<h1>Hello, you're logged in!</h1>";
-draw_footer("footer");
+draw_footer();
 
 ?>

@@ -20,12 +20,12 @@ $stmt->execute([
 ]);
 
 if ($stmt->fetch()) {
-    // User exists — redirect back with error
+    // User exists redirect back with error
     header('Location: ../pages/signup.php?error=exists');
     exit();
 }
 
-// Hash the password right away
+// Hash the password 
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
 // Insert the new user

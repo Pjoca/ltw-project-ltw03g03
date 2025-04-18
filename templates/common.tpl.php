@@ -12,9 +12,35 @@
     <main>
 <?php } ?>
 
-<?php function draw_footer($title) { ?>
+<?php function draw_footer() { ?>
     </main>
+
+    <footer>
+      Ultimate Freelancer Site &copy; 2025
+    </footer>
   </body>
-  <h1><?=$title?></h1>
 </html>
+<?php } ?>
+
+<?php function draw_login() { ?>
+  <form action="/../actions/action_login.php" method="post">
+  <label>Username or Email: <input type="text" name="username" required></label><br>
+  <label>Password: <input type="password" name="password" required></label><br>
+  <button type="submit">Login</button>
+</form>
+<?php } ?>
+
+<?php function draw_signup() { ?>
+  <form action="../actions/action_signup.php" method="post">
+    <label>Name: <input type="text" name="name" required></label><br>
+    <label>Username: <input type="text" name="username" required></label><br>
+    <label>Email: <input type="email" name="email" required></label><br>
+    <label>Password: <input type="password" name="password" required></label><br>
+    <label>Role: 
+      <select name="role" required>
+        <option value="client">Client</option>
+        <option value="freelancer">Freelancer</option>
+      </select></label><br>
+  <button type="submit">Sign Up</button>
+</form>
 <?php } ?>

@@ -11,3 +11,4 @@ function require_login(): void {
         exit();
     }
 }
+?>

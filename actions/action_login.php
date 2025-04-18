@@ -39,3 +39,4 @@ else if ($user && $password == $user['password']) {
 else {
     header('Location: ../pages/login.php?error=1');
 }
+?>

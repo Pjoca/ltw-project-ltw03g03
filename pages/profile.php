@@ -21,3 +21,4 @@ $user = $stmt->fetch();
 draw_header('Your Profile');
 draw_profile($user);
 draw_footer();
+?>
