@@ -28,6 +28,8 @@
   <label>Password: <input type="password" name="password" required></label><br>
   <button type="submit">Login</button>
 </form>
+<p> Don't have an account ? <a href="/../pages/signup.php">Sign up</a>
+</p>
 <?php } ?>
 
 <?php function draw_signup() { ?>
@@ -43,4 +45,6 @@
       </select></label><br>
   <button type="submit">Sign Up</button>
 </form>
+<p> Have an account ? <a href="/../pages/login.php">Log in</a>
+</p>
 <?php } ?>
