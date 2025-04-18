@@ -2,7 +2,7 @@
 
 ## Project made by:
 
-    - Pessoa 1
+    - Pedro Paixão
     - Pessoa 2
     - Pessoa 3
 
