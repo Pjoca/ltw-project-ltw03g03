@@ -6,7 +6,7 @@
     <p><strong>Role:</strong> <?= htmlspecialchars($user['role']) ?></p>
     <p><strong>Joined:</strong> <?= htmlspecialchars($user['created_at']) ?></p>
     <p>
-      <a href="dashboard.php">← Back to Dashboard</a> | 
+      <a href="login.php">Back to Login Page</a>  <!-- Depois por a redirecionar para uma pagina de jeito --> 
       <a href="logout.php">Logout</a>
     </p>
   </div>
