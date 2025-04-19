@@ -131,21 +131,30 @@ footer {
   margin: 0 auto;
   max-width: 400px;
   border-radius: var(--radius);
-  box-shadow: none; 
-  text-align: left;
+  box-shadow: none;
 }
 
-.profile-card p {
-  margin: 15px 0;
+/*Row Layout*/
+.profile-row {
+  display: flex;
+  margin: 10px 0;
   font-size: 1rem;
   color: var(--text-color);
 }
 
-.profile-card strong {
-  color: var(--primary-color);
-  display: inline-block;
-  min-width: 80px;
+.profile-row .label {
+  font-weight: bold;
+  color: var(--label-color);
+  min-width: 100px;
+  text-align: left;
+  margin-right: 10px;
 }
+
+.profile-row span:last-child {
+  flex: 1;
+  text-align: left;
+}
+
 
 .profile-links {
   margin-top: 30px;
