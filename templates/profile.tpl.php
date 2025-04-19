@@ -1,13 +1,12 @@
 <?php function draw_profile(array $user) { ?>
-  <div class="profile-card" style="max-width: 600px; margin: 50px auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px;">
-    <h2><?= htmlspecialchars($user['name']) ?>'s Profile</h2>
+  <div class="profile-card">
     <p><strong>Username:</strong> <?= htmlspecialchars($user['username']) ?></p>
     <p><strong>Email:</strong> <?= htmlspecialchars($user['email']) ?></p>
     <p><strong>Role:</strong> <?= htmlspecialchars($user['role']) ?></p>
     <p><strong>Joined:</strong> <?= htmlspecialchars($user['created_at']) ?></p>
-    <p>
-      <a href="login.php">Back to Login Page</a>  <!-- Depois por a redirecionar para uma pagina de jeito --> 
+  </div>
+  <div class="profile-actions">
+      <a href="login.php">Back to Login Page</a>
       <a href="logout.php">Logout</a>
-    </p>
   </div>
 <?php } ?>

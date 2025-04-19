@@ -1,20 +1,170 @@
+/* style.css - Unified Design */
+
+:root {
+  --primary-color: #00c9a7;
+  --primary-hover: #00b497;
+  --accent-color: #a2f0e0;
+  --bg-color: #e2efff;
+  --card-bg: #ffffff;
+  --input-bg: #ffffff;
+  --button-bg: #00c9a7;
+  --button-text: #ffffff;
+  --text-color: #333;
+  --text-muted: #666;
+  --label-color: #4ca88c;
+  --border-color: #ccc;
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  --radius: 12px;
+  --transition: 0.3s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 body {
-    max-width: 40em;
-    margin: 0 auto;
-  }
-  
-  section {
-    display: flex;
-    flex-wrap: wrap;
-  
-    gap: 1em;
-  
-    article {
-      flex-grow: 1;
-      padding: 1em;
-  
-      border: 1px solid crimson;
-      background-color: darkred;
-      color: white;
-    }
-  }
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+h1, h2 {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 30px;
+}
+
+/* General Container Card */
+main {
+  width: 100%;
+  max-width: 450px;
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border-top: 5px solid var(--primary-color);
+}
+
+/* Form Styling */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+label {
+  font-weight: 600;
+  color: var(--label-color);
+  display: flex;
+  flex-direction: column;
+}
+
+input, select {
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  font-size: 14px;
+  margin-top: 5px;
+  background: var(--input-bg);
+  transition: border var(--transition);
+}
+
+input:focus, select:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+/* Button Styling */
+button {
+  padding: 12px;
+  background: var(--button-bg);
+  border: none;
+  border-radius: var(--radius);
+  color: var(--button-text);
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+button:hover {
+  background: var(--primary-hover);
+}
+
+/* Text + Links */
+p {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 14px;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: opacity 0.2s ease-in-out;
+}
+
+a:hover {
+  text-decoration: underline;
+  opacity: 0.85;
+}
+
+footer {
+  margin-top: auto;
+  padding: 20px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Profile Card Styling */
+.profile-card {
+  background: transparent;
+  padding: 25px;
+  margin: 0 auto;
+  max-width: 400px;
+  border-radius: var(--radius);
+  box-shadow: none; 
+  text-align: left;
+}
+
+.profile-card p {
+  margin: 15px 0;
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+.profile-card strong {
+  color: var(--primary-color);
+  display: inline-block;
+  min-width: 80px;
+}
+
+.profile-links {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile-links a {
+  font-weight: bold;
+}
+
+/* Profile Actions Styling */
+.profile-actions {
+  display: flex;
+  justify-content: center; 
+  gap: 40px; 
+  margin-top: 20px; 
+}
+
+.profile-actions a {
+  font-weight: bold;
+}

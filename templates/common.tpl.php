@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <link rel="stylesheet" href="../css/style.css">
+
   </head>
   <body>
     <h1><?=$title?></h1>
@@ -14,7 +15,6 @@
 
 <?php function draw_footer() { ?>
     </main>
-
     <footer>
       Ultimate Freelancer Site &copy; 2025
     </footer>
