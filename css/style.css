@@ -1,21 +1,23 @@
-/* style.css - Unified Design */
-
 :root {
   --primary-color: #00c9a7;
   --primary-hover: #00b497;
   --accent-color: #a2f0e0;
+
   --bg-color: #e2efff;
   --card-bg: #ffffff;
   --input-bg: #ffffff;
-  --button-bg: #00c9a7;
-  --button-text: #ffffff;
+
   --text-color: #333;
   --text-muted: #666;
   --label-color: #4ca88c;
+
   --border-color: #ccc;
   --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
   --radius: 12px;
   --transition: 0.3s ease;
+
+  --button-bg: var(--primary-color);
+  --button-text: #ffffff;
 }
 
 * {
@@ -41,7 +43,6 @@ h1, h2 {
   margin-bottom: 30px;
 }
 
-/* General Container Card */
 main {
   width: 100%;
   max-width: 450px;
@@ -52,7 +53,6 @@ main {
   border-top: 5px solid var(--primary-color);
 }
 
-/* Form Styling */
 form {
   display: flex;
   flex-direction: column;
@@ -67,12 +67,12 @@ label {
 }
 
 input, select {
+  margin-top: 5px;
   padding: 10px;
+  font-size: 14px;
+  background: var(--input-bg);
   border: 1px solid var(--border-color);
   border-radius: var(--radius);
-  font-size: 14px;
-  margin-top: 5px;
-  background: var(--input-bg);
   transition: border var(--transition);
 }
 
@@ -81,24 +81,24 @@ input:focus, select:focus {
   outline: none;
 }
 
-/* Button Styling */
-button {
-  padding: 12px;
+button, .create-button {
+  padding: 12px 20px;
   background: var(--button-bg);
-  border: none;
-  border-radius: var(--radius);
   color: var(--button-text);
   font-size: 16px;
   font-weight: bold;
+  border: none;
+  border-radius: var(--radius);
   cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
   transition: background var(--transition);
 }
 
-button:hover {
+button:hover, .create-button:hover {
   background: var(--primary-hover);
 }
 
-/* Text + Links */
 p {
   margin-top: 15px;
   text-align: center;
@@ -116,64 +116,11 @@ a:hover {
   opacity: 0.85;
 }
 
+/* === Footer === */
 footer {
   margin-top: auto;
   padding: 20px;
   text-align: center;
   font-size: 13px;
   color: var(--text-muted);
-}
-
-/* Profile Card Styling */
-.profile-card {
-  background: transparent;
-  padding: 25px;
-  margin: 0 auto;
-  max-width: 400px;
-  border-radius: var(--radius);
-  box-shadow: none;
-}
-
-/*Row Layout*/
-.profile-row {
-  display: flex;
-  margin: 10px 0;
-  font-size: 1rem;
-  color: var(--text-color);
-}
-
-.profile-row .label {
-  font-weight: bold;
-  color: var(--label-color);
-  min-width: 100px;
-  text-align: left;
-  margin-right: 10px;
-}
-
-.profile-row span:last-child {
-  flex: 1;
-  text-align: left;
-}
-
-
-.profile-links {
-  margin-top: 30px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.profile-links a {
-  font-weight: bold;
-}
-
-/* Profile Actions Styling */
-.profile-actions {
-  display: flex;
-  justify-content: center; 
-  gap: 40px; 
-  margin-top: 20px; 
-}
-
-.profile-actions a {
-  font-weight: bold;
 }

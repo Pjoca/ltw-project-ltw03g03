@@ -8,7 +8,7 @@
 </div>
 
 <div class="profile-actions">
-  <a href="login.php">Home Page</a>
+  <a href="home.php">Home Page</a>
   <a href="/../edit/profile.edit.php">Edit Profile</a>
   <a href="logout.php">Logout</a>
 </div>
@@ -40,5 +40,8 @@
         <input type="submit" value="Save Changes">
       </div>
     </form>
-    <p><a href="/../pages/profile.php">Back to Profile</a></p>
+    <div class="profile-actions">
+      <a href="/../pages/profile.php">Back to Profile</a>
+  </div>
+    
 <?php } ?>

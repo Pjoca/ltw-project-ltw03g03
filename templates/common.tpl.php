@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
 
   </head>
   <body>
@@ -47,4 +48,42 @@
 </form>
 <p> Have an account ? <a href="/../pages/login.php">Log in</a>
 </p>
+<?php } ?>
+
+<?php function draw_home() { ?>
+  <section class="homepage-banner">
+    <h2>Available Services</h2>
+    <p>Share your skills with the world — post a service and start earning today!</p>
+    <a href="create_service.php" class="create-button">+ Offer a Service</a>
+  </section>
+
+  <section class="service-list">
+    <article class="service-card">
+      <div class="service-header">
+        <div>
+          <h3>John Developer</h3>
+          <span class="date">Apr 21, 2025</span>
+        </div>
+      </div>
+      <p>I will build a responsive website for your business or project using modern tools.</p>
+      <div class="service-actions">
+      </div>
+    </article>
+
+    <article class="service-card">
+      <div class="service-header">
+        
+        <div>
+          <h3>Jane Designer</h3>
+          <span class="date">Apr 20, 2025</span>
+        </div>
+      </div>
+      <p>Offering clean, modern UI/UX designs for web and mobile applications.</p>
+      <div class="service-actions">
+      </div>
+    </article>
+  </section>
+  <div class="profile-actions">
+    <a href="/../pages/profile.php">Back to Profile</a>
+</div>
 <?php } ?>
