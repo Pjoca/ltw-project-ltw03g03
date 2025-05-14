@@ -3,7 +3,7 @@
 ## Project made by:
 
     - Pedro Paixão
-    - Pessoa 2
+    - Afonso Araújo
     - Pessoa 3
 
 ## Run Project
