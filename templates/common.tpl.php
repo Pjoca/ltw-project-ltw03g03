@@ -66,9 +66,22 @@
             <span class="date"><?= date('M d, Y', strtotime($service['created_at'])) ?></span>
           </div>
         </div>
+        
+        <h4><?= htmlspecialchars($service['title']) ?></h4>
+        <p><strong>Category:</strong> <?= htmlspecialchars($service['category']) ?></p>
         <p><?= htmlspecialchars($service['description']) ?></p>
+        <p><strong>Price:</strong> $<?= htmlspecialchars(number_format($service['price'], 2)) ?></p>
+        <p><strong>Delivery time:</strong> <?= htmlspecialchars($service['delivery_time']) ?> days</p>
+
+        <?php if (!empty($service['media'])): ?>
+          <div class="service-media">
+            <img src="/media/<?= htmlspecialchars($service['media']) ?>" alt="Service media" style="max-width: 300px;">
+            <!-- Or use <video> if it's a video -->
+          </div>
+        <?php endif; ?>
+
         <div class="service-actions">
-          <!-- Add buttons/actions here -->
+          <!-- Optional buttons or contact links -->
         </div>
       </article>
     <?php } ?>
@@ -78,4 +91,5 @@
     <a href="/../pages/profile.php">Back to Profile</a>
   </div>
 <?php } ?>
+
 

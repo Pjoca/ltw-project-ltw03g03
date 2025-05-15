@@ -57,53 +57,75 @@
     margin-bottom: 20px;
   }
   
-  .service-list {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-  }
-  
-  .service-card {
-    background: #fff;
-    padding: 20px;
-    border-radius: 16px;
-    border-left: 5px solid var(--primary-color);
-    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
-  }
-  
-  .service-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 10px;
-  }
-  
-  .avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-  }
-  
-  .service-header h3 {
-    margin: 0;
-    font-size: 1.1rem;
-    color: var(--primary-color);
-  }
-  
-  .date {
-    font-size: 0.85rem;
-    color: #888;
-  }
-  
-  .service-card p {
-    margin: 10px 0;
-    color: var(--text-color);
-  }
-  
-  .service-actions {
-    display: flex;
-    gap: 20px;
-    font-size: 1rem;
-    color: var(--primary-color);
-  }
-  
+  /* Service List Layout */
+.service-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 20px;
+}
+
+/* Individual Service Card */
+.service-card {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: var(--radius);
+  border-left: 5px solid var(--primary-color);
+  box-shadow: var(--shadow);
+  transition: transform var(--transition);
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Header: Name & Date */
+.service-header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.service-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--primary-color);
+}
+
+.service-header .date {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Service Title */
+.service-card strong {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+/* Service Body Text */
+.service-card p {
+  margin: 8px 0;
+  color: var(--text-color);
+  font-size: 0.95rem;
+}
+
+/* Optional Actions (e.g. buttons or links) */
+.service-actions {
+  display: flex;
+  gap: 20px;
+  font-size: 1rem;
+  color: var(--primary-color);
+  margin-top: 10px;
+}
+
+/* Optional media styling */
+.service-media {
+  margin-top: 12px;
+  max-width: 100%;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
