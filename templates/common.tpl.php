@@ -50,7 +50,7 @@
 </p>
 <?php } ?>
 
-<?php function draw_home() { ?>
+<?php function draw_home(array $services) { ?>
   <section class="homepage-banner">
     <h2>Available Services</h2>
     <p>Share your skills with the world — post a service and start earning today!</p>
@@ -58,32 +58,24 @@
   </section>
 
   <section class="service-list">
-    <article class="service-card">
-      <div class="service-header">
-        <div>
-          <h3>John Developer</h3>
-          <span class="date">Apr 21, 2025</span>
+    <?php foreach ($services as $service) { ?>
+      <article class="service-card">
+        <div class="service-header">
+          <div>
+            <h3><?= htmlspecialchars($service['poster_name']) ?></h3>
+            <span class="date"><?= date('M d, Y', strtotime($service['created_at'])) ?></span>
+          </div>
         </div>
-      </div>
-      <p>I will build a responsive website for your business or project using modern tools.</p>
-      <div class="service-actions">
-      </div>
-    </article>
-
-    <article class="service-card">
-      <div class="service-header">
-        
-        <div>
-          <h3>Jane Designer</h3>
-          <span class="date">Apr 20, 2025</span>
+        <p><?= htmlspecialchars($service['description']) ?></p>
+        <div class="service-actions">
+          <!-- Add buttons/actions here -->
         </div>
-      </div>
-      <p>Offering clean, modern UI/UX designs for web and mobile applications.</p>
-      <div class="service-actions">
-      </div>
-    </article>
+      </article>
+    <?php } ?>
   </section>
+
   <div class="profile-actions">
     <a href="/../pages/profile.php">Back to Profile</a>
-</div>
+  </div>
 <?php } ?>
+
