@@ -18,7 +18,7 @@ $title = trim($_POST['title'] ?? '');
 $description = trim($_POST['description'] ?? '');
 $price = floatval($_POST['price'] ?? 0);
 $delivery_time = (int) ($_POST['delivery_time'] ?? 0);
-$media = trim($_POST['media'] ?? '');
+$media = trim($_POST['media'] ?? null);
 
 if (empty($title) || empty($description) || $category_id <= 0 || $price <= 0 || $delivery_time <= 0) {
     $errors[] = 'All fields except media are required and must be valid.';
