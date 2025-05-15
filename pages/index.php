@@ -6,10 +6,13 @@
 
 
 if (!is_logged_in()) {
-    header('Location: ../pages/login.php');
-    exit();
+  header('Location: ../pages/login.php');
+  exit();
 }
 
+else {
+  header('Location: ../pages/home.php');
+}
 
 draw_header("Welcome");
 draw_footer();

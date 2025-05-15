@@ -109,7 +109,7 @@
   <div style="display: flex; gap: 1em; flex-wrap: wrap; margin-bottom: 1em;">
     <div style="flex: 1 1 120px; min-width:120px;">
       <label for="price" style="display:block; font-weight: bold; margin-bottom: 0.3em;">Price</label>
-      <input type="number" name="price" id="price" min="0.01" step="0.01" required placeholder="-- €" style="width:100%; padding: 0.5em;">
+      <input type="number" name="price" id="price" min="0.01" step="0.01" required placeholder="-- $" style="width:100%; padding: 0.5em;">
     </div>
 
     <div style="flex: 1 1 120px; min-width:120px;">
