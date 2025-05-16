@@ -50,47 +50,28 @@
 </p>
 <?php } ?>
 
-<?php function draw_home(array $services) { ?>
+<?php function draw_home() { ?>
   <section class="homepage-banner">
     <h2>Available Services</h2>
     <p>Share your skills with the world — post a service and start earning today!</p>
     <a href="create_service.php" class="create-button">+ Offer a Service</a>
   </section>
 
-  <section class="service-list">
-    <?php foreach ($services as $service) { ?>
-      <article class="service-card">
-        <div class="service-header">
-          <div>
-            <h3><?= htmlspecialchars($service['poster_name']) ?></h3>
-            <span class="date"><?= date('M d, Y', strtotime($service['created_at'])) ?></span>
-          </div>
-        </div>
-        
-        <h4><?= htmlspecialchars($service['title']) ?></h4>
-        <p><strong>Category:</strong> <?= htmlspecialchars($service['category']) ?></p>
-        <p><?= htmlspecialchars($service['description']) ?></p>
-        <p><strong>Price:</strong> $<?= htmlspecialchars(number_format($service['price'], 2)) ?></p>
-        <p><strong>Delivery time:</strong> <?= htmlspecialchars($service['delivery_time']) ?> days</p>
-
-        <?php if (!empty($service['media'])): ?>
-          <div class="service-media">
-            <img src="/media/<?= htmlspecialchars($service['media']) ?>" alt="Service media" style="max-width: 300px;">
-            <!-- Or use <video> if it's a video -->
-          </div>
-        <?php endif; ?>
-
-        <div class="service-actions">
-          <!-- Optional buttons or contact links -->
-        </div>
-      </article>
-    <?php } ?>
+  <section id="service-list" class="service-list">
+    <!-- Services will be dynamically loaded here -->
   </section>
+
+  <div id="loader" style="text-align:center; display:none;">
+    <p>Loading...</p>
+  </div>
 
   <div class="profile-actions">
     <a href="/../pages/profile.php">Back to Profile</a>
   </div>
+
+  <script src="/../js/load_services.js" defer></script>
 <?php } ?>
+
 
 
 <?php function draw_create_service() { ?>
