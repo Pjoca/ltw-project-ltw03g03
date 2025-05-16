@@ -36,17 +36,18 @@
   .profile-links a, .profile-actions a {
     font-weight: bold;
   }
-  
-  /* Homepage Section */
+
   .homepage-banner {
-    background: var(--accent-color);
-    padding: 30px;
-    border-radius: 16px;
-    margin-bottom: 40px;
-    text-align: center;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  }
-  
+  width: 90%; /* Increase width to occupy more space */
+  max-width: 1200px; /* Limit maximum width */
+  margin: 0 auto 40px; /* Center horizontally and add bottom margin */
+  background: var(--accent-color);
+  padding: 30px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
   .homepage-banner h2 {
     color: var(--primary-color);
     margin-bottom: 10px;
@@ -58,74 +59,89 @@
   }
   
   /* Service List Layout */
-.service-list {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  margin-top: 20px;
-}
-
-/* Individual Service Card */
 .service-card {
   background: var(--card-bg);
-  padding: 20px;
   border-radius: var(--radius);
-  border-left: 5px solid var(--primary-color);
-  box-shadow: var(--shadow);
-  transition: transform var(--transition);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  margin-bottom: 20px;
+  padding: 20px;
 }
 
-.service-card:hover {
-  transform: translateY(-4px);
-}
-
-/* Header: Name & Date */
 .service-header {
   display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
 .service-header h3 {
   margin: 0;
   font-size: 1.1rem;
-  color: var(--primary-color);
+  color: var(--text-color);
+  text-align: left;
 }
 
 .service-header .date {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
-  margin-top: 2px;
 }
 
-/* Service Title */
-.service-card strong {
-  display: block;
-  margin-bottom: 5px;
-  font-size: 1rem;
-  color: var(--text-color);
-}
-
-/* Service Body Text */
-.service-card p {
-  margin: 8px 0;
-  color: var(--text-color);
-  font-size: 0.95rem;
-}
-
-/* Optional Actions (e.g. buttons or links) */
-.service-actions {
-  display: flex;
-  gap: 20px;
-  font-size: 1rem;
+.service-card h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
   color: var(--primary-color);
-  margin-top: 10px;
+  font-size: 1.2rem;
 }
 
-/* Optional media styling */
+.service-card p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-color);
+  margin: 8px 0;
+}
+
+.service-card p strong {
+  color: var(--label-color);
+  font-weight: bold;
+}
+
 .service-media {
-  margin-top: 12px;
-  max-width: 100%;
+  margin-top: 15px;
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.service-media img,
+.service-media video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.service-actions {
+  margin-top: 15px;
+  text-align: left;
+}
+
+.service-actions a,
+.service-actions button {
+  display: inline-block;
+  padding: 8px 12px;
+  margin-right: 10px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+  border-radius: var(--radius);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.service-actions a:hover,
+.service-actions button:hover {
+  background-color: var(--primary-color);
+  color: var(--button-text);
 }
