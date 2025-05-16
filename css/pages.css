@@ -38,9 +38,9 @@
   }
 
   .homepage-banner {
-  width: 90%; /* Increase width to occupy more space */
-  max-width: 1200px; /* Limit maximum width */
-  margin: 0 auto 40px; /* Center horizontally and add bottom margin */
+  width: 90%; 
+  max-width: 1200px; 
+  margin: 0 auto 40px; 
   background: var(--accent-color);
   padding: 30px;
   border-radius: 16px;
@@ -144,4 +144,20 @@
 .service-actions button:hover {
   background-color: var(--primary-color);
   color: var(--button-text);
+}
+
+.spinner {
+  border: 4px solid #ccc;
+  border-top: 4px solid var(--primary-color);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

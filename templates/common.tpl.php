@@ -61,9 +61,10 @@
     <!-- Services will be dynamically loaded here -->
   </section>
 
-  <div id="loader" style="text-align:center; display:none;">
-    <p>Loading...</p>
-  </div>
+<div id="loader" style="display: none; text-align: center; padding: 1rem;">
+  <div class="spinner"></div>
+</div>
+  
 
   <div class="profile-actions">
     <a href="/../pages/profile.php">Back to Profile</a>

@@ -62,7 +62,7 @@ function handleScroll() {
     }
 
     scrollTimeout = null;
-  }, 500); // wait 500ms between scroll checks
+  }, 1000); // wait 1000ms between scroll checks
 }
 
 
