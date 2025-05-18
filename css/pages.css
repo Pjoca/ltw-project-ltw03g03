@@ -59,20 +59,25 @@
   }
 
   /* Back Navigation */
-  .back-nav {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto 10px;
-    text-align: center
-  }
+.back-nav {
+  display: flex;
+  gap: 1rem;
+  margin: 0 auto 10px;
+  width: 90%;
+  max-width: 1200px;
+  justify-content: flex-start;
+}
 
-  .back-button {
-    font-weight: bold;
-    color: var(--primary-color);
-    text-decoration: none;
-    font-size: 0.95rem;
-    transition: color var(--transition);
-  }
+.nav-button {
+  font-weight: bold;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-size: 0.95rem;
+  background-color: var(--light-color);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  transition: background-color var(--transition), color var(--transition);
+}
 
   
   /* Service List Layout */

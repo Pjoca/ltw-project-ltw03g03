@@ -52,9 +52,10 @@
 
 <?php function draw_home() { ?>
   <div class="homepage-container">
-    <div class="back-nav">
-      <a href="/../pages/profile.php" class="back-button">Back to Profile</a>
-    </div>
+  <div class="back-nav">
+    <a href="/../pages/my_services.php" class="nav-button"> My Services </a>
+    <a href="/../pages/profile.php" class="nav-button"> Back to Profile </a>
+  </div>
 
     <section class="homepage-banner">
       <h2>Available Services</h2>
@@ -75,6 +76,32 @@
 <?php } ?>
 
 
+<?php function draw_my_services_page() { ?>
+  <div class="homepage-container">
+    <div class="back-nav">
+      <a href="/../pages/home.php" class="nav-button"> Home </a>
+      <a href="/../pages/profile.php" class="nav-button"> Back to Profile </a>
+    </div>
+
+    <section class="homepage-banner">
+      <h2>My Services</h2>
+      <p>Here are the services you've listed.</p>
+    </section>
+
+    <section id="my-service-list" class="service-list">
+      <!-- User's services will load here -->
+    </section>
+
+    <div id="loader" style="display: none; text-align: center; padding: 1rem;">
+      <div class="spinner"></div>
+    </div>
+  </div>
+
+  <script>
+    const userId = <?= json_encode($_SESSION['user_id']) ?>;
+  </script>
+  <script src="/../js/load_services.js" defer></script>
+<?php } ?>
 
 
 <?php function draw_create_service() { ?>

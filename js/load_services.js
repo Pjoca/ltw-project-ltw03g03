@@ -2,12 +2,18 @@ let offset = 0;
 const limit = 3;
 let loading = false;
 
-function createServiceCard(service) {
+function escapeHtml(text) {
+  const div = document.createElement("div");
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function createServiceCard(service, postedBy = null) {
   return `
     <article class="service-card">
       <div class="service-header">
         <div>
-          <h3>${escapeHtml(service.poster_name)}</h3>
+          <h3>${escapeHtml(postedBy ?? service.poster_name ?? 'You')}</h3>
           <span class="date">${new Date(service.created_at).toLocaleDateString()}</span>
         </div>
       </div>
@@ -16,27 +22,27 @@ function createServiceCard(service) {
       <p>${escapeHtml(service.description)}</p>
       <p><strong>Price:</strong> $${parseFloat(service.price).toFixed(2)}</p>
       <p><strong>Delivery time:</strong> ${escapeHtml(service.delivery_time)} days</p>
-      ${service.media ? `<div class="service-media"><img src="/media/${escapeHtml(service.media)}" style="max-width:300px;" /></div>` : ''}
+      ${service.media ? `<div class="service-media"><img src="https://picsum.photos/200?service=${encodeURIComponent(service.title)}" style="max-width:300px;" /></div>` : ''}
     </article>
   `;
 }
 
-async function loadMoreServices() {
+async function loadServices(url, containerId, postedBy = null) {
   if (loading) return;
   loading = true;
   document.getElementById('loader').style.display = 'block';
 
   try {
-    const res = await fetch(`/../actions/action_load_services.php?offset=${offset}`);
+    const res = await fetch(`${url}?offset=${offset}`);
     const data = await res.json();
 
     if (data.length === 0) {
       window.removeEventListener('scroll', handleScroll);
     }
 
-    const container = document.getElementById('service-list');
+    const container = document.getElementById(containerId);
     data.forEach(service => {
-      container.insertAdjacentHTML('beforeend', createServiceCard(service));
+      container.insertAdjacentHTML('beforeend', createServiceCard(service, postedBy));
     });
 
     offset += limit;
@@ -48,8 +54,6 @@ async function loadMoreServices() {
   }
 }
 
-let scrollTimeout = null;
-
 function handleScroll() {
   if (scrollTimeout) return;
   scrollTimeout = setTimeout(() => {
@@ -58,20 +62,23 @@ function handleScroll() {
     const offsetHeight = document.body.offsetHeight;
 
     if (scrollY + innerHeight >= offsetHeight - 20) {
-      loadMoreServices();
+      if (document.getElementById('service-list')) {
+        loadServices('/../actions/action_load_services.php', 'service-list');
+      } else if (document.getElementById('my-service-list')) {
+        loadServices('/../actions/action_load_my_services.php', 'my-service-list', 'You');
+      }
     }
-
     scrollTimeout = null;
-  }, 1000); // wait 1000ms between scroll checks
+  }, 1000);
 }
 
+let scrollTimeout = null;
 
 window.addEventListener('scroll', handleScroll);
-window.addEventListener('DOMContentLoaded', loadMoreServices);
-
-// Optional: basic XSS protection
-function escapeHtml(text) {
-  const div = document.createElement("div");
-  div.textContent = text;
-  return div.innerHTML;
-}
+window.addEventListener('DOMContentLoaded', () => {
+  if (document.getElementById('service-list')) {
+    loadServices('/../actions/action_load_services.php', 'service-list');
+  } else if (document.getElementById('my-service-list')) {
+    loadServices('/../actions/action_load_my_services.php', 'my-service-list', 'You');
+  }
+});
