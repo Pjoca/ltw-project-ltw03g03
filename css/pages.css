@@ -57,6 +57,23 @@
     color: var(--text-color);
     margin-bottom: 20px;
   }
+
+  /* Back Navigation */
+  .back-nav {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto 10px;
+    text-align: center
+  }
+
+  .back-button {
+    font-weight: bold;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color var(--transition);
+  }
+
   
   /* Service List Layout */
 .service-card {

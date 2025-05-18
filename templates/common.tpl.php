@@ -51,27 +51,29 @@
 <?php } ?>
 
 <?php function draw_home() { ?>
-  <section class="homepage-banner">
-    <h2>Available Services</h2>
-    <p>Share your skills with the world — post a service and start earning today!</p>
-    <a href="create_service.php" class="create-button">+ Offer a Service</a>
-  </section>
+  <div class="homepage-container">
+    <div class="back-nav">
+      <a href="/../pages/profile.php" class="back-button">Back to Profile</a>
+    </div>
 
-  <section id="service-list" class="service-list">
-    <!-- Services will be dynamically loaded here -->
-  </section>
+    <section class="homepage-banner">
+      <h2>Available Services</h2>
+      <p>Share your skills with the world — post a service and start earning today!</p>
+      <a href="create_service.php" class="create-button">+ Offer a Service</a>
+    </section>
 
-<div id="loader" style="display: none; text-align: center; padding: 1rem;">
-  <div class="spinner"></div>
-</div>
-  
+    <section id="service-list" class="service-list">
+      <!-- Services will be dynamically loaded here -->
+    </section>
 
-  <div class="profile-actions">
-    <a href="/../pages/profile.php">Back to Profile</a>
+    <div id="loader" style="display: none; text-align: center; padding: 1rem;">
+      <div class="spinner"></div>
+    </div>
   </div>
 
   <script src="/../js/load_services.js" defer></script>
 <?php } ?>
+
 
 
 
