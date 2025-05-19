@@ -53,8 +53,9 @@
 <?php function draw_home() { ?>
   <div class="homepage-container">
   <div class="back-nav">
+    <a href="/../pages/profile.php" class="nav-button"> Profile </a>
     <a href="/../pages/my.services.php" class="nav-button"> My Services </a>
-    <a href="/../pages/profile.php" class="nav-button"> Back to Profile </a>
+    <a href="logout.php"class="nav-button"> Logout</a>
   </div>
 
     <section class="homepage-banner">

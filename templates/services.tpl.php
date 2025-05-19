@@ -1,13 +1,14 @@
 <?php function draw_my_services_page() { ?>
-  <div class="homepage-container">
     <div class="back-nav">
       <a href="/../pages/home.php" class="nav-button"> Home </a>
-      <a href="/../pages/profile.php" class="nav-button"> Back to Profile </a>
+      <a href="/../pages/profile.php" class="nav-button"> Profile </a>
+      <a href="logout.php"class="nav-button"> Logout</a>
     </div>
 
     <section class="homepage-banner">
       <h2>My Services</h2>
       <p>Here are the services you've listed.</p>
+      <a href="create.service.php" class="create-button">+ Offer a Service</a>
     </section>
 
     <section id="my-service-list" class="service-list">
@@ -60,13 +61,21 @@
       <select name="category_id" id="category_id" required style="width:100%; padding: 0.5em;">
         <option value="" disabled selected>Select a category</option>
         <option value="1">Web Development</option>
-        <option value="2">Design</option>
+        <option value="2">Graphic Design</option>
+        <option value="3">Writing</option>
+        <option value="4">Marketing</option>
+        <option value="5">Photography</option>
+        <option value="6">Other</option>
       </select>
     </div>
   </div>
 
   <button type="submit" class="submit-button" style="padding: 0.75em 1.5em; font-size: 1em; cursor: pointer;">Submit Service</button>
 </form>
+
+  <div class="back-nav">
+      <a href="/../pages/home.php" class="nav-button"> Home </a>
+  </div>
 
 
 <?php } ?>
