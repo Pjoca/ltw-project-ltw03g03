@@ -10,13 +10,14 @@ if (!isset($_SESSION['user_id'])) {
 $db = getDatabaseConnection();
 $stmt = $db->prepare('
   UPDATE Services
-  SET title = ?, description = ?, price = ?, delivery_time = ?
+  SET title = ?, description = ?, category_id = ?, price = ?, delivery_time = ?
   WHERE title = ? AND user_id = ?
 ');
 
 $stmt->execute([
   $_POST['title'],
   $_POST['description'],
+  $_POST['category_id'],
   $_POST['price'],
   $_POST['delivery_time'],
   $_POST['original_title'],

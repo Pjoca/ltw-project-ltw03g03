@@ -20,6 +20,11 @@
   --button-text: #ffffff;
 }
 
+textarea {
+  resize: none;
+}
+
+
 * {
   box-sizing: border-box;
   margin: 0;
