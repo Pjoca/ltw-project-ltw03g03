@@ -63,9 +63,9 @@ function handleScroll() {
 
     if (scrollY + innerHeight >= offsetHeight - 20) {
       if (document.getElementById('service-list')) {
-        loadServices('/../actions/action_load_services.php', 'service-list');
+        loadServices('/../actions/action.load.services.php', 'service-list');
       } else if (document.getElementById('my-service-list')) {
-        loadServices('/../actions/action_load_my_services.php', 'my-service-list', 'You');
+        loadServices('/../actions/action.load.my.services.php', 'my-service-list', 'You');
       }
     }
     scrollTimeout = null;
@@ -77,8 +77,8 @@ let scrollTimeout = null;
 window.addEventListener('scroll', handleScroll);
 window.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('service-list')) {
-    loadServices('/../actions/action_load_services.php', 'service-list');
+    loadServices('/../actions/action.load.services.php', 'service-list');
   } else if (document.getElementById('my-service-list')) {
-    loadServices('/../actions/action_load_my_services.php', 'my-service-list', 'You');
+    loadServices('/../actions/action.load.my.services.php', 'my-service-list', 'You');
   }
 });

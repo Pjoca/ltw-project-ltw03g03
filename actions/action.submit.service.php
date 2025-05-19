@@ -26,7 +26,7 @@ if (empty($title) || empty($description) || $category_id <= 0 || $price <= 0 || 
 
 if (!empty($errors)) {
     $_SESSION['error_messages'] = $errors;
-    header('Location: ../pages/create_service.php');
+    header('Location: ../pages/create.service.php');
     exit;
 }
 

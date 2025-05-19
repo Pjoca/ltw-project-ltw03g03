@@ -15,7 +15,7 @@
 <?php } ?>
 
 <?php function draw_edit_profile(array $user) { ?>
-    <form action="../actions/action_edit_profile.php" method="post">
+    <form action="../actions/action.edit.profile.php" method="post">
       <div>
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" value="<?= htmlspecialchars($user['name']) ?>" required>
