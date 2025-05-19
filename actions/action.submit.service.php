@@ -18,7 +18,29 @@ $title = trim($_POST['title'] ?? '');
 $description = trim($_POST['description'] ?? '');
 $price = floatval($_POST['price'] ?? 0);
 $delivery_time = (int) ($_POST['delivery_time'] ?? 0);
-$media = trim($_POST['media'] ?? null);
+$mediaPath = null;
+
+if (isset($_FILES['media']) && $_FILES['media']['error'] === UPLOAD_ERR_OK) {
+    $uploadDir = __DIR__ . '/../uploads/';
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0755, true);
+    }
+
+    $fileTmpPath = $_FILES['media']['tmp_name'];
+    $fileName = basename($_FILES['media']['name']);
+    $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+    $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+
+    if (in_array($fileExtension, $allowedExtensions)) {
+        $newFileName = uniqid('img_', true) . '.' . $fileExtension;
+        $destination = $uploadDir . $newFileName;
+
+        if (move_uploaded_file($fileTmpPath, $destination)) {
+            $mediaPath = '/uploads/' . $newFileName;
+        }
+    }
+}
+
 
 if (empty($title) || empty($description) || $category_id <= 0 || $price <= 0 || $delivery_time <= 0) {
     $errors[] = 'All fields except media are required and must be valid.';
@@ -43,7 +65,7 @@ $stmt->execute([
     ':description' => $description,
     ':price' => $price,
     ':delivery_time' => $delivery_time,
-    ':media' => $media
+    ':media' => $mediaPath
 ]);
 
 header('Location: ../pages/home.php');

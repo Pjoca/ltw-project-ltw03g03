@@ -29,7 +29,7 @@
 
 <?php function draw_create_service() { ?>
 
-<form action="../actions/action.submit.service.php" method="POST">
+<form action="../actions/action.submit.service.php" method="POST" enctype="multipart/form-data">
   <div>
     <label for="title">Title</label>
     <input type="text" name="title" id="title" required>
@@ -53,7 +53,7 @@
 
     <div>
       <label for="media">Media (optional)</label>
-      <input type="text" name="media" id="media" placeholder="Image URL or path">
+      <input type="file" name="media" id="media" accept="image/*">
     </div>
 
     <div>
@@ -80,7 +80,7 @@
 
 
 <?php function draw_edit_service(array $service) { ?>
-  <form action="/../actions/action.edit.service.php" method="POST">
+  <form action="/../actions/action.edit.service.php" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="original_title" value="<?= htmlspecialchars($service['title']) ?>">
 
     <div>
@@ -113,6 +113,18 @@
     <div>
       <label for="delivery_time">Delivery Time (days):</label>
       <input type="number" id="delivery_time" name="delivery_time" value="<?= htmlspecialchars($service['delivery_time']) ?>" required>
+    </div>
+
+    <?php if (!empty($service['media'])): ?>
+      <div>
+        <label for="current_image">Current Image:</label>
+        <img src="<?= htmlspecialchars($service['media']) ?>" alt="Current image" style="max-width: 300px;">
+      </div>
+    <?php endif; ?>
+
+    <div>
+      <label for="media">Change Image (optional):</label>
+      <input type="file" id="media" name="media" accept="image/*">
     </div>
 
     <div>
