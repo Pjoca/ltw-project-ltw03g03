@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-draw_header('HomePage');
+draw_header('Home Page');
 draw_home();  
 draw_footer();
 ?>

@@ -79,3 +79,33 @@
 
 
 <?php } ?>
+
+<?php function draw_edit_service(array $service) { ?>
+  <form action="/../actions/action.edit.service.php" method="POST">
+    <input type="hidden" name="original_title" value="<?= htmlspecialchars($service['title']) ?>">
+
+    <div>
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" value="<?= htmlspecialchars($service['title']) ?>" required>
+    </div>
+
+    <div>
+      <label for="description">Description:</label>
+      <textarea id="description" name="description" required><?= htmlspecialchars($service['description']) ?></textarea>
+    </div>
+
+    <div>
+      <label for="price">Price:</label>
+      <input type="number" id="price" name="price" step="0.01" value="<?= htmlspecialchars($service['price']) ?>" required>
+    </div>
+
+    <div>
+      <label for="delivery_time">Delivery Time (days):</label>
+      <input type="number" id="delivery_time" name="delivery_time" value="<?= htmlspecialchars($service['delivery_time']) ?>" required>
+    </div>
+
+    <div>
+      <input type="submit" value="Update Service">
+    </div>
+  </form>
+<?php } ?>

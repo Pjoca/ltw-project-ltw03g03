@@ -9,6 +9,7 @@ function escapeHtml(text) {
 }
 
 function createServiceCard(service, postedBy = null) {
+  const isOwner = postedBy === 'You';
   return `
     <article class="service-card">
       <div class="service-header">
@@ -23,9 +24,15 @@ function createServiceCard(service, postedBy = null) {
       <p><strong>Price:</strong> $${parseFloat(service.price).toFixed(2)}</p>
       <p><strong>Delivery time:</strong> ${escapeHtml(service.delivery_time)} days</p>
       ${service.media ? `<div class="service-media"><img src="https://picsum.photos/200?service=${encodeURIComponent(service.title)}" style="max-width:300px;" /></div>` : ''}
+      ${isOwner ? `
+        <div class="service-actions">
+          <button class="edit-btn" onclick="editService('${service.title}')">Edit</button>
+          <button class="delete-btn" onclick="deleteService('${service.title}')">Delete</button>
+        </div>` : ''}
     </article>
   `;
 }
+
 
 async function loadServices(url, containerId, postedBy = null) {
   if (loading) return;
@@ -82,3 +89,30 @@ window.addEventListener('DOMContentLoaded', () => {
     loadServices('/../actions/action.load.my.services.php', 'my-service-list', 'You');
   }
 });
+
+async function deleteService(title) {
+  if (!confirm(`Are you sure you want to delete "${title}"?`)) return;
+
+  try {
+    const res = await fetch('/../actions/action.delete.service.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title })
+    });
+
+    const result = await res.json();
+    if (result.success) {
+      alert('Service deleted');
+      location.reload();
+    } else {
+      alert('Failed to delete service');
+    }
+  } catch (err) {
+    console.error(err);
+    alert('An error occurred');
+  }
+}
+
+function editService(title) {
+  window.location.href = `/../edit/service.edit.php?title=${encodeURIComponent(title)}`;
+}
