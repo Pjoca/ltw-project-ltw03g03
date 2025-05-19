@@ -108,4 +108,8 @@
       <input type="submit" value="Update Service">
     </div>
   </form>
+
+    <div class="back-nav">
+      <a href="/../pages/my.services.php" class="nav-button"> My Services </a>
+  </div>
 <?php } ?>
