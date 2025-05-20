@@ -178,6 +178,31 @@
   margin: 0 auto;
 }
 
+.filters {
+  max-width: 600px;
+  margin: 15px auto;
+  padding: 10px 15px;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  align-items: end;
+}
+
+.filters label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--label-color);
+}
+
+.filters button {
+  grid-column: 1 / -1;        /* full-width button */
+  justify-self: start;
+  padding: 8px 16px;
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);

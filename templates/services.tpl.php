@@ -11,7 +11,7 @@
       <a href="create.service.php" class="create-button">+ Offer a Service</a>
     </section>
 
-    <section id="my-service-list" class="service-list">
+    <section id="service-list" class="service-list">
       <!-- User's services will load here -->
     </section>
 
