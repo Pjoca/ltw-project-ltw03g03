@@ -48,6 +48,16 @@ h1, h2 {
   margin-bottom: 30px;
 }
 
+.auth-page main {
+  width: 100%;
+  max-width: 450px;
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border-top: 5px solid var(--primary-color);
+}
+
 main {
   width: 100%;
   max-width: 450px;
@@ -57,6 +67,13 @@ main {
   box-shadow: var(--shadow);
   border-top: 5px solid var(--primary-color);
 }
+
+@media (min-width: 1024px) {
+  main {
+    max-width: 800px;
+  }
+}
+
 
 form {
   display: flex;
@@ -106,7 +123,7 @@ button:hover, .create-button:hover {
 
 p {
   margin-top: 15px;
-  text-align: center;
+  text-align: left;
   font-size: 14px;
 }
 

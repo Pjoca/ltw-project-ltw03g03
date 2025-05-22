@@ -24,6 +24,7 @@
 <?php } ?>
 
 <?php function draw_login() { ?>
+  <body class="auth-page">
   <form action="/../actions/action.login.php" method="post">
   <label>Username or Email: <input type="text" name="username" required></label><br>
   <label>Password: <input type="password" name="password" required></label><br>
@@ -31,9 +32,11 @@
 </form>
 <p> Don't have an account ? <a href="/../pages/signup.php">Sign up</a>
 </p>
+</body>
 <?php } ?>
 
 <?php function draw_signup() { ?>
+  <body class="auth-page">
   <form action="../actions/action.signup.php" method="post">
     <label>Name: <input type="text" name="name" required></label><br>
     <label>Username: <input type="text" name="username" required></label><br>
@@ -48,6 +51,7 @@
 </form>
 <p> Have an account ? <a href="/../pages/login.php">Log in</a>
 </p>
+</body>
 <?php } ?>
 
 <?php function draw_home() { ?>

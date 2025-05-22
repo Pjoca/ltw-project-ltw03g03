@@ -20,10 +20,10 @@ function createServiceCard(service, postedBy = null) {
       </div>
       <h4>${escapeHtml(service.title)}</h4>
       <p><strong>Category:</strong> ${escapeHtml(service.category)}</p>
-      <p>${escapeHtml(service.description)}</p>
       <p><strong>Price:</strong> $${parseFloat(service.price).toFixed(2)}</p>
       <p><strong>Delivery time:</strong> ${escapeHtml(service.delivery_time)} days</p>
-      ${service.media ? `<div class="service-media"><img src="${escapeHtml(service.media)}" style="max-width:300px;" /></div>` : ''}
+      <p>${escapeHtml(service.description)}</p>
+      ${service.media ? `<div class="service-media"><img src="${escapeHtml(service.media)}" /></div>` : ''}
       ${isOwner ? `
         <div class="service-actions">
           <button class="edit-btn" onclick="editService('${service.title}')">Edit</button>
