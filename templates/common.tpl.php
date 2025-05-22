@@ -60,6 +60,7 @@
     <a href="/../pages/profile.php" class="nav-button"> Profile </a>
     <a href="/../pages/my.services.php" class="nav-button"> My Services </a>
     <a href="/../pages/search.php" class="nav-button"> Search </a>
+    <a href="/../pages/messages.php" class="nav-button"> Messages </a>
     <a href="logout.php"class="nav-button"> Logout</a>
   </div>
 
