@@ -78,7 +78,6 @@
 
 <?php } ?>
 
-
 <?php function draw_edit_service(array $service) { ?>
   <form action="/../actions/action.edit.service.php" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="original_title" value="<?= htmlspecialchars($service['title']) ?>">
@@ -135,4 +134,33 @@
     <div class="back-nav">
       <a href="/../pages/my.services.php" class="nav-button"> My Services </a>
   </div>
+<?php } ?>
+
+<?php function draw_search() { ?>
+    <section class="filters" style="margin: 0 auto 30px; max-width: 600px;">
+      <form id="filter-form" style="display: flex; flex-wrap: wrap; gap: 6px;">
+        <label style="flex: 1 1 50px;">
+          Category:
+          <select name="category" id="category">
+            <option value="">All</option>
+            <?php foreach ($cats as $c): ?>
+              <option value="<?= htmlspecialchars($c) ?>"><?= htmlspecialchars($c) ?></option>
+            <?php endforeach; ?>
+          </select>
+        </label>
+
+        <label style="flex: 1 1 50px;">
+          Max&nbsp;Price:
+          <input type="number" name="price" id="price" min="0" placeholder="e.g. 100">
+        </label>
+
+        <label style="flex: 1 1 70px;">
+          Max&nbsp;Delivery&nbsp;(days):
+          <input type="number" name="delivery" id="delivery" min="1" placeholder="e.g. 7">
+        </label>
+
+        <button type="submit" style="flex: 1 1 100%; text-align: center; margin-top: 6px;">Apply</button>
+
+      </form>
+    </section>
 <?php } ?>

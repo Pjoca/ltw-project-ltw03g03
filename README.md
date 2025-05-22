@@ -3,8 +3,8 @@
 ## Project made by:
 
     - Pedro Paixão
+    - Matheus Liotti
     - Afonso Araújo
-    - Pessoa 3
 
 ## Run Project
 
