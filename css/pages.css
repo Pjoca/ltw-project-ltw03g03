@@ -26,7 +26,7 @@
     text-align: left;
   }
   
-  .profile-links, .profile-actions {
+  .profile-links, .profile-actions, .message-actions {
     display: flex;
     justify-content: center;
     gap: 40px;
@@ -202,6 +202,73 @@
   justify-self: start;
   padding: 8px 16px;
 }
+
+/* Ajustes para harmonizar a seção de mensagens com o estilo do profile */
+
+.messages {
+  max-width: 400px;
+  margin: 2rem auto 1rem;
+  padding: 25px;
+  background: transparent; /* igual ao .profile-card */
+  border-radius: var(--radius);
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+.messages h2 {
+  margin-bottom: 1rem;
+  font-weight: bold;
+  color: var(--label-color);
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.message-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.message-item {
+  background: transparent; /* sem cor de fundo para combinar com .profile-card */
+  border: none; /* remover borda para combinar */
+  padding: 10px 0;
+  margin-bottom: 10px;
+  border-radius: 0; /* sem arredondamento */
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 1rem;
+}
+
+.message-item strong {
+  color: var(--label-color);
+  font-weight: bold;
+}
+
+.message-actions {
+  display: flex;
+  justify-content: center; /* igual a .profile-links */
+  gap: 40px;
+  margin-top: 20px;
+}
+
+.message-actions a {
+  font-weight: bold;
+  color: var(--primary-color);
+  background-color: transparent;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.message-actions a:hover {
+  background-color: var(--primary-color);
+  color: var(--button-text);
+}
+
 
 @keyframes spin {
   to {

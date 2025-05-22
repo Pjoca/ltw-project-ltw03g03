@@ -18,6 +18,8 @@ $delivery = isset($_GET['delivery']) && $_GET['delivery'] !== '' ? (int)$_GET['d
 // Base query
 $query = '
   SELECT 
+    Services.id,
+    Services.user_id as freelancer_id,  
     Services.title,
     Services.description,
     Services.price,

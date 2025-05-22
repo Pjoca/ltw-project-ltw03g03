@@ -49,16 +49,20 @@ CREATE TABLE Transactions (
     FOREIGN KEY (service_id) REFERENCES services(id) ON DELETE CASCADE
 );
 
-
 CREATE TABLE Messages (
     id INTEGER PRIMARY KEY,
     sender_id INTEGER NOT NULL,
     receiver_id INTEGER NOT NULL,
     message TEXT NOT NULL,
     sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    service_id INTEGER,
+    proposed_price REAL,
+    delivery_days INTEGER,
     FOREIGN KEY (sender_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (receiver_id) REFERENCES users(id) ON DELETE CASCADE
+    FOREIGN KEY (receiver_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (service_id) REFERENCES Services(id) ON DELETE SET NULL
 );
+
 
 CREATE TABLE Reviews (
     id INTEGER PRIMARY KEY AUTOINCREMENT,

@@ -25,11 +25,14 @@ function createServiceCard(s, postedBy = null) {
       <p><strong>Price:</strong> $${parseFloat(s.price).toFixed(2)}</p>
       <p><strong>Delivery time:</strong> ${escapeHtml(s.delivery_time)} days</p>
       ${s.media ? `<div class="service-media"><img src="${escapeHtml(s.media)}" style="max-width:300px;" /></div>` : ''}
-      ${isOwner ? `
-        <div class="service-actions">
-          <button class="edit-btn"    onclick="editService('${s.title}')">Edit</button>
-          <button class="delete-btn"  onclick="deleteService('${s.title}')">Delete</button>
-        </div>` : ''}
+      <div class="service-actions">
+        ${isOwner ? `
+          <button class="edit-btn" onclick="editService('${s.title}')">Edit</button>
+          <button class="delete-btn" onclick="deleteService('${s.title}')">Delete</button>
+        ` : `
+          <a href="/../pages/contact.freelancer.php?service_id=${s.id}" class="contact-btn">Contact Freelancer</a>
+        `}
+      </div>
     </article>`;
 }
 
@@ -103,3 +106,4 @@ window.addEventListener('DOMContentLoaded', () => {
     loadServices(endpoint, 'service-list', posterName, getFilterValues());
   });
 });
+

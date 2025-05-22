@@ -11,6 +11,7 @@
   <a href="home.php">Home Page</a>
   <a href="/../edit/profile.edit.php">Edit Profile</a>
   <a href="logout.php">Logout</a>
+  <a href="messages.php">Messages</a>
 </div>
 <?php } ?>
 

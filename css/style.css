@@ -128,3 +128,22 @@ footer {
   font-size: 13px;
   color: var(--text-muted);
 }
+
+.contact-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #4a6fa5;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+
+.quick-question-btn {
+  padding: 8px 16px;
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
