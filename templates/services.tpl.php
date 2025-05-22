@@ -136,30 +136,39 @@
   </div>
 <?php } ?>
 
-<?php function draw_search() { ?>
-    <section class="filters" style="margin: 0 auto 30px; max-width: 600px;">
-      <form id="filter-form" style="display: flex; flex-wrap: wrap; gap: 6px;">
-        <label style="flex: 1 1 50px;">
+<?php
+function draw_search() { ?>
+    <section class="search-filters-section">
+      <form id="filter-form" action="search.php" method="GET" class="search-filter-form">
+
+        <label class="filter-label full-width">
+          Search:
+          <input type="text" name="query" id="search-query" placeholder="e.g. photography, website, Bob Smith" value="<?= htmlspecialchars($selectedQuery) ?>">
+        </label>
+
+        <label class="filter-label">
           Category:
-          <select name="category" id="category">
+          <select name="category" id="category" class="filter-select">
             <option value="">All</option>
-            <?php foreach ($cats as $c): ?>
-              <option value="<?= htmlspecialchars($c) ?>"><?= htmlspecialchars($c) ?></option>
+            <?php foreach ($categories as $c): ?>
+              <option value="<?= htmlspecialchars($c->name) ?>" <?= ($selectedCategory === $c->name) ? 'selected' : '' ?>>
+                <?= htmlspecialchars($c->name) ?>
+              </option>
             <?php endforeach; ?>
           </select>
         </label>
 
-        <label style="flex: 1 1 50px;">
+        <label class="filter-label">
           Max&nbsp;Price:
-          <input type="number" name="price" id="price" min="0" placeholder="e.g. 100">
+          <input type="number" name="price" id="price" min="0" placeholder="e.g. 100" class="filter-input" value="<?= htmlspecialchars((string)$selectedPrice) ?>">
         </label>
 
-        <label style="flex: 1 1 70px;">
+        <label class="filter-label">
           Max&nbsp;Delivery&nbsp;(days):
-          <input type="number" name="delivery" id="delivery" min="1" placeholder="e.g. 7">
+          <input type="number" name="delivery" id="delivery" min="1" placeholder="e.g. 7" class="filter-input" value="<?= htmlspecialchars((string)$selectedDelivery) ?>">
         </label>
 
-        <button type="submit" style="flex: 1 1 100%; text-align: center; margin-top: 6px;">Apply</button>
+        <button type="submit" class="apply-filters-button">Apply Filters</button>
 
       </form>
     </section>
