@@ -1,14 +1,19 @@
 <?php
 declare(strict_types=1);
 require_once(__DIR__ . '/../database/connection.db.php');
-session_start();  // Ensure session is started
+session_start();
 
 $db = getDatabaseConnection();
 
-$user_id = $_SESSION['id'] ?? null;
+$user_id = $_SESSION['user_id'] ?? null;
 
 $offset = isset($_GET['offset']) ? (int)$_GET['offset'] : 0;
 $limit = 3;
+
+// Get filters
+$category = $_GET['category'] ?? '';
+$price = isset($_GET['price']) && $_GET['price'] !== '' ? (float)$_GET['price'] : null;
+$delivery = isset($_GET['delivery']) && $_GET['delivery'] !== '' ? (int)$_GET['delivery'] : null;
 
 // Base query
 $query = '
@@ -27,22 +32,39 @@ $query = '
   WHERE 1=1
 ';
 
-// Exclude current user's services if logged in
+$params = [];
+
+// Filter out current user's services
 if ($user_id !== null) {
     $query .= ' AND Services.user_id != :user_id';
+    $params[':user_id'] = $user_id;
 }
 
-$query .= '
-  ORDER BY Services.created_at DESC
-  LIMIT :limit OFFSET :offset
-';
+// Apply filters
+if (!empty($category)) {
+    $query .= ' AND Categories.name = :category';
+    $params[':category'] = $category;
+}
+
+if ($price !== null) {
+    $query .= ' AND Services.price <= :price';
+    $params[':price'] = $price;
+}
+
+if ($delivery !== null) {
+    $query .= ' AND Services.delivery_time <= :delivery';
+    $params[':delivery'] = $delivery;
+}
+
+$query .= ' ORDER BY Services.created_at DESC LIMIT :limit OFFSET :offset';
 
 $stmt = $db->prepare($query);
 
-if ($user_id !== null) {
-    $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+// Bind parameters
+foreach ($params as $key => $value) {
+    $type = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;
+    $stmt->bindValue($key, $value, $type);
 }
-
 $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
 $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
 $stmt->execute();
