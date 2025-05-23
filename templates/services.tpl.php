@@ -133,6 +133,7 @@
   <!-- Filtered services will be inserted here -->
 </section>
 <p id="no-results-message">No results available.</p>
+<div id="pagination-controls" class="pagination-controls"></div>
 
 <script src="/../js/search.services.js" defer></script>
 

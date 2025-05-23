@@ -1,4 +1,6 @@
 let loading = false;
+let currentPage = 1; // Start on the first page
+const itemsPerPage = 5; // This MUST match the $limit in action.search.services.php
 
 function escapeHtml(text) {
   const div = document.createElement("div");
@@ -36,7 +38,9 @@ function buildQueryParams() {
   if (category) params.append('category', category);
   if (price) params.append('price', price);
   if (delivery) params.append('delivery', delivery);
-  // No offset or limit parameters are appended now
+  // Add pagination parameters
+  params.append('page', currentPage.toString());
+  params.append('limit', itemsPerPage.toString()); // Though PHP defines limit, good to be explicit
 
   return params.toString();
 }
@@ -45,35 +49,97 @@ async function loadFilteredServices() {
   if (loading) return;
   loading = true;
   const noResultsMessage = document.getElementById('no-results-message');
+  const searchResultsContainer = document.getElementById('search-results');
+  const paginationControlsContainer = document.getElementById('pagination-controls');
 
   try {
-    // Always clear previous results when a new search is initiated
-    document.getElementById('search-results').innerHTML = '';
+    // Clear previous results and messages
+    searchResultsContainer.innerHTML = '';
     noResultsMessage.style.display = 'none';
+    paginationControlsContainer.innerHTML = ''; // Clear old pagination buttons
 
     const query = buildQueryParams();
     const res = await fetch(`/../actions/action.search.services.php?${query}`);
-    const data = await res.json();
+    const data = await res.json(); // Data will now be an object with services, totalResults, etc.
 
-    const container = document.getElementById('search-results');
-
-    if (data.length === 0) {
-      noResultsMessage.style.display = 'block';
-    } else {
-      data.forEach(service => {
-        container.insertAdjacentHTML('beforeend', createServiceCard(service));
+    if (data.services && data.services.length > 0) {
+      data.services.forEach(service => {
+        searchResultsContainer.insertAdjacentHTML('beforeend', createServiceCard(service));
       });
+      // Render pagination controls after displaying services
+      renderPaginationControls(data.totalResults, data.currentPage, data.itemsPerPage);
+    } else {
+      noResultsMessage.style.display = 'block';
     }
   } catch (e) {
     console.error("Failed to load services", e);
+    // Optionally display an error message to the user
   } finally {
     loading = false;
   }
 }
 
+// Function to dynamically create and update pagination buttons
+function renderPaginationControls(totalResults, currentPage, itemsPerPage) {
+  const totalPages = Math.ceil(totalResults / itemsPerPage);
+  const paginationControls = document.getElementById('pagination-controls');
+  paginationControls.innerHTML = ''; // Clear previous controls
+
+  if (totalPages <= 1) {
+    return; // No need for pagination if only one page
+  }
+
+  // Create "Previous" button
+  if (currentPage > 1) {
+    const prevButton = document.createElement('button');
+    prevButton.textContent = 'Previous';
+    prevButton.classList.add('pagination-button'); // Add a class for styling
+    prevButton.addEventListener('click', () => {
+      currentPage--;
+      loadFilteredServices(); // Load previous page
+    });
+    paginationControls.appendChild(prevButton);
+  }
+
+  // Create page number buttons (simplified: show all pages)
+  
+  for (let i = 1; i <= totalPages; i++) {
+    const pageButton = document.createElement('button');
+    pageButton.textContent = i;
+    pageButton.classList.add('pagination-button'); // Add a class for styling
+    if (i === currentPage) {
+      pageButton.disabled = true; // Disable the current page button
+      pageButton.classList.add('active'); // Add an active class for styling
+    }
+    pageButton.addEventListener('click', () => {
+      currentPage = i;
+      loadFilteredServices(); // Load the clicked page
+    });
+    paginationControls.appendChild(pageButton);
+  }
+
+  // Create "Next" button
+  if (currentPage < totalPages) {
+    const nextButton = document.createElement('button');
+    nextButton.textContent = 'Next';
+    nextButton.classList.add('pagination-button'); // Add a class for styling
+    nextButton.addEventListener('click', () => {
+      currentPage++;
+      loadFilteredServices(); // Load next page
+    });
+    paginationControls.appendChild(nextButton);
+  }
+}
+
 window.addEventListener('DOMContentLoaded', () => {
+  // Event listener for the filter form submission
   document.getElementById('filter-form').addEventListener('submit', e => {
     e.preventDefault();
-    loadFilteredServices(); // Call without 'reset' parameter as it's handled internally
+    currentPage = 1; // Always reset to the first page when a new search/filter is applied
+    loadFilteredServices();
   });
+
+  // Call loadFilteredServices on initial page load if you want to show results immediately
+  // based on any URL parameters or default state
+  // loadFilteredServices(); // Uncomment this line if you want to load results on DOMContentLoaded
 });
