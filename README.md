@@ -20,7 +20,7 @@
 - [ ] Mark services as completed once delivered.
 
 **Clients:**
-- [ ] Browse services using filters like category, price, and rating.
+- [x] Browse services using filters like category, price, and rating.
 - [ ] Engage with freelancers to ask questions or request custom orders.
 - [ ] Hire freelancers and proceed to checkout (simulate payment process).
 - [ ] Leave ratings and reviews for completed services.

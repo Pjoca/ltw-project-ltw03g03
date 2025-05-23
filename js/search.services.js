@@ -1,6 +1,8 @@
 let offset = 0;
 const limit = 3;
 let loading = false;
+let hasSearched = false;
+let scrollTimeout = null;
 
 function escapeHtml(text) {
   const div = document.createElement("div");
@@ -28,7 +30,7 @@ function createServiceCard(service) {
 }
 
 function buildQueryParams() {
-  const query = document.getElementById('search-query').value;
+  const query = document.getElementById('search-query').value.trim();
   const category = document.getElementById('category').value;
   const price = document.getElementById('price').value;
   const delivery = document.getElementById('delivery').value;
@@ -77,24 +79,26 @@ async function loadFilteredServices(reset = false) {
 }
 
 function handleScroll() {
+  if (!hasSearched) return;
   if (scrollTimeout) return;
+
   scrollTimeout = setTimeout(() => {
     if (window.scrollY + window.innerHeight >= document.body.offsetHeight - 20) {
       loadFilteredServices();
     }
     scrollTimeout = null;
-  }, 1000);
+  }, 500);
 }
-
-let scrollTimeout = null;
-
-window.addEventListener('scroll', handleScroll);
 
 window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('filter-form').addEventListener('submit', e => {
     e.preventDefault();
+    hasSearched = true;
     loadFilteredServices(true);
   });
 
-  loadFilteredServices(true); // Initial load
+  // Don't trigger search on load
+  // Only allow scroll after a real search
 });
+
+window.addEventListener('scroll', handleScroll);
