@@ -2,6 +2,8 @@
     <div class="back-nav">
       <a href="/../pages/home.php" class="nav-button"> Home </a>
       <a href="/../pages/profile.php" class="nav-button"> Profile </a>
+      <a href="/../pages/my.search.php" class="nav-button"> Search </a>
+      <a href="/../pages/messages.php" class="nav-button"> Messages </a>
       <a href="logout.php"class="nav-button"> Logout</a>
     </div>
 
@@ -28,6 +30,15 @@
 
 
 <?php function draw_create_service() { ?>
+
+    <div class="back-nav">
+      <a href="/../pages/home.php" class="nav-button"> Home </a>
+      <a href="/../pages/profile.php" class="nav-button"> Profile </a>
+      <a href="/../pages/my.services.php" class="nav-button"> My Services </a>
+      <a href="/../pages/search.php" class="nav-button"> Search </a>
+      <a href="/../pages/messages.php" class="nav-button"> Messages </a>
+      <a href="logout.php"class="nav-button"> Logout</a>
+    </div>
 
 <form action="../actions/action.submit.service.php" method="POST" enctype="multipart/form-data">
   <div>
@@ -72,15 +83,10 @@
   <button type="submit" class="submit-button">Submit Service</button>
 </form>
 
-<div class="back-nav">
-  <a href="/../pages/home.php" class="nav-button">Home</a>
-</div>
-
 <?php } ?>
 
 <?php function draw_search(string $selectedQuery, string $selectedCategory, ?float $selectedPrice, ?int $selectedDelivery, array $categories, array $services) { ?>
 
-    <div class="homepage-container">
     <div class="back-nav">
       <a href="/../pages/home.php" class="nav-button"> Home </a>
       <a href="/../pages/profile.php" class="nav-button"> Profile </a>
@@ -122,7 +128,7 @@
         <button type="submit" class="filter-button">Apply Filters</button>
       </form>
     </section>
-
+    
 <section id="search-results" class="service-list">
   <!-- Filtered services will be inserted here -->
 </section>
