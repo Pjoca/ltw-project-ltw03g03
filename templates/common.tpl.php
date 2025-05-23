@@ -74,7 +74,7 @@
       <!-- Services will be dynamically loaded here -->
     </section>
 
-    <div id="loader" style="display: none; text-align: center; padding: 1rem;">
+    <div id="loader">
       <div class="spinner"></div>
     </div>
   </div>
