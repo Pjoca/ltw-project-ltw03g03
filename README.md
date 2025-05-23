@@ -31,7 +31,9 @@
 - [ ] Oversee and ensure the smooth operation of the entire system.
 
 **Extra:**
-- [ ] Something else.
+- [x] **Efficient Service Display:** Services are loaded in pages to optimize performance and user experience, avoiding the burden of loading all available services at once.
+- [x] **Search Result Pagination:** Implemented a clear pagination system for search results, allowing users to navigate through multiple pages of filtered services.
+- [ ] ***Advanced Full-Text Search:** Leverages a robust full-text indexing system to provide fast and highly relevant search results across all service content and user profiles.
 
 ## Running
 

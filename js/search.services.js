@@ -1,6 +1,6 @@
 let loading = false;
-let currentPage = 1; // Start on the first page
-const itemsPerPage = 5; // This MUST match the $limit in action.search.services.php
+let currentPage = 1; 
+const itemsPerPage = 5; 
 
 function escapeHtml(text) {
   const div = document.createElement("div");
@@ -38,9 +38,10 @@ function buildQueryParams() {
   if (category) params.append('category', category);
   if (price) params.append('price', price);
   if (delivery) params.append('delivery', delivery);
+
   // Add pagination parameters
   params.append('page', currentPage.toString());
-  params.append('limit', itemsPerPage.toString()); // Though PHP defines limit, good to be explicit
+  params.append('limit', itemsPerPage.toString());
 
   return params.toString();
 }
@@ -73,59 +74,52 @@ async function loadFilteredServices() {
     }
   } catch (e) {
     console.error("Failed to load services", e);
-    // Optionally display an error message to the user
   } finally {
     loading = false;
   }
 }
 
 // Function to dynamically create and update pagination buttons
-function renderPaginationControls(totalResults, currentPage, itemsPerPage) {
+function renderPaginationControls(totalResults) {
   const totalPages = Math.ceil(totalResults / itemsPerPage);
   const paginationControls = document.getElementById('pagination-controls');
-  paginationControls.innerHTML = ''; // Clear previous controls
+  paginationControls.innerHTML = '';
 
-  if (totalPages <= 1) {
-    return; // No need for pagination if only one page
-  }
+  if (totalPages <= 1) return;
 
-  // Create "Previous" button
   if (currentPage > 1) {
     const prevButton = document.createElement('button');
     prevButton.textContent = 'Previous';
-    prevButton.classList.add('pagination-button'); // Add a class for styling
+    prevButton.classList.add('pagination-button');
     prevButton.addEventListener('click', () => {
       currentPage--;
-      loadFilteredServices(); // Load previous page
+      loadFilteredServices();
     });
     paginationControls.appendChild(prevButton);
   }
 
-  // Create page number buttons (simplified: show all pages)
-  
   for (let i = 1; i <= totalPages; i++) {
     const pageButton = document.createElement('button');
     pageButton.textContent = i;
-    pageButton.classList.add('pagination-button'); // Add a class for styling
+    pageButton.classList.add('pagination-button');
     if (i === currentPage) {
-      pageButton.disabled = true; // Disable the current page button
-      pageButton.classList.add('active'); // Add an active class for styling
+      pageButton.disabled = true;
+      pageButton.classList.add('active');
     }
     pageButton.addEventListener('click', () => {
       currentPage = i;
-      loadFilteredServices(); // Load the clicked page
+      loadFilteredServices();
     });
     paginationControls.appendChild(pageButton);
   }
 
-  // Create "Next" button
   if (currentPage < totalPages) {
     const nextButton = document.createElement('button');
     nextButton.textContent = 'Next';
-    nextButton.classList.add('pagination-button'); // Add a class for styling
+    nextButton.classList.add('pagination-button');
     nextButton.addEventListener('click', () => {
       currentPage++;
-      loadFilteredServices(); // Load next page
+      loadFilteredServices();
     });
     paginationControls.appendChild(nextButton);
   }
@@ -138,8 +132,4 @@ window.addEventListener('DOMContentLoaded', () => {
     currentPage = 1; // Always reset to the first page when a new search/filter is applied
     loadFilteredServices();
   });
-
-  // Call loadFilteredServices on initial page load if you want to show results immediately
-  // based on any URL parameters or default state
-  // loadFilteredServices(); // Uncomment this line if you want to load results on DOMContentLoaded
 });
