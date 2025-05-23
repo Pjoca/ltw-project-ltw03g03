@@ -106,7 +106,7 @@
         <div class="form-group">
           <label for="category">Category:</label>
           <select name="category" id="category" class="filter-select">
-            <!-- <option value="">All</option> -->
+            <option value="">All</option> 
             <?php foreach ($categories as $c): ?>
               <option value="<?= htmlspecialchars($c->name) ?>" <?= ($selectedCategory === $c->name) ? 'selected' : '' ?>>
               <?= htmlspecialchars($c->name) ?>
@@ -133,10 +133,6 @@
   <!-- Filtered services will be inserted here -->
 </section>
 <p id="no-results-message">No results available.</p>
-
-<div id="loader">
-  <div class="spinner"></div>
-</div>
 
 <script src="/../js/search.services.js" defer></script>
 

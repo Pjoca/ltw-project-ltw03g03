@@ -1,8 +1,4 @@
-let offset = 0;
-const limit = 3;
 let loading = false;
-let hasSearched = false;
-let scrollTimeout = null;
 
 function escapeHtml(text) {
   const div = document.createElement("div");
@@ -40,71 +36,44 @@ function buildQueryParams() {
   if (category) params.append('category', category);
   if (price) params.append('price', price);
   if (delivery) params.append('delivery', delivery);
-  params.append('offset', offset);
+  // No offset or limit parameters are appended now
 
   return params.toString();
 }
 
-async function loadFilteredServices(reset = false) {
+async function loadFilteredServices() {
   if (loading) return;
   loading = true;
-  document.getElementById('loader').style.display = 'block';
   const noResultsMessage = document.getElementById('no-results-message');
 
   try {
-    if (reset) {
-      offset = 0;
-      document.getElementById('search-results').innerHTML = '';
-      noResultsMessage.style.display = 'none';
-    }
+    // Always clear previous results when a new search is initiated
+    document.getElementById('search-results').innerHTML = '';
+    noResultsMessage.style.display = 'none';
 
     const query = buildQueryParams();
-    const res = await fetch(`/../actions/action.load.services.php?${query}`);
+    const res = await fetch(`/../actions/action.search.services.php?${query}`);
     const data = await res.json();
 
     const container = document.getElementById('search-results');
 
     if (data.length === 0) {
-      if (reset) {
-        noResultsMessage.style.display = 'block';
-      }
-      window.removeEventListener('scroll', handleScroll);
+      noResultsMessage.style.display = 'block';
     } else {
       data.forEach(service => {
         container.insertAdjacentHTML('beforeend', createServiceCard(service));
       });
-      offset += limit;
     }
   } catch (e) {
     console.error("Failed to load services", e);
   } finally {
     loading = false;
-    document.getElementById('loader').style.display = 'none';
   }
-}
-
-
-function handleScroll() {
-  if (!hasSearched) return;
-  if (scrollTimeout) return;
-
-  scrollTimeout = setTimeout(() => {
-    if (window.scrollY + window.innerHeight >= document.body.offsetHeight - 20) {
-      loadFilteredServices();
-    }
-    scrollTimeout = null;
-  }, 500);
 }
 
 window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('filter-form').addEventListener('submit', e => {
     e.preventDefault();
-    hasSearched = true;
-    loadFilteredServices(true);
+    loadFilteredServices(); // Call without 'reset' parameter as it's handled internally
   });
-
-  // Don't trigger search on load
-  // Only allow scroll after a real search
 });
-
-window.addEventListener('scroll', handleScroll);
