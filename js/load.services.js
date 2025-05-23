@@ -71,7 +71,9 @@ function handleScroll() {
     if (scrollY + innerHeight >= offsetHeight - 20) {
       if (document.getElementById('service-list')) {
         loadServices('/../actions/action.load.services.php', 'service-list');
-      } else if (document.getElementById('my-service-list')) {
+      } 
+      
+      else if (document.getElementById('my-service-list')) {
         loadServices('/../actions/action.load.my.services.php', 'my-service-list', 'You');
       }
     }
