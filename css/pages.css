@@ -247,3 +247,10 @@
 .filter-button:hover {
   background-color: var(--primary-hover);
 }
+
+#no-results-message {
+  display: none;
+  text-align: center;
+  margin-top: 1rem;
+  color: var(--primary-color);
+}

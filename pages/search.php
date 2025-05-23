@@ -4,7 +4,7 @@ session_start();
 
 require_once(__DIR__ . '/../templates/common.tpl.php');
 require_once(__DIR__ . '/../templates/services.tpl.php');
-require_once(__DIR__ . '/../actions/action.search.service.php');
+require_once(__DIR__ . '/../utils/filter.search.php');
 require_once(__DIR__ . '/../utils/categories.php');
 
 if (!isset($_SESSION['user_id'])) {

@@ -49,27 +49,32 @@ async function loadFilteredServices(reset = false) {
   if (loading) return;
   loading = true;
   document.getElementById('loader').style.display = 'block';
+  const noResultsMessage = document.getElementById('no-results-message');
 
   try {
     if (reset) {
       offset = 0;
       document.getElementById('search-results').innerHTML = '';
+      noResultsMessage.style.display = 'none';
     }
 
     const query = buildQueryParams();
     const res = await fetch(`/../actions/action.load.services.php?${query}`);
     const data = await res.json();
 
-    if (data.length === 0 && !reset) {
-      window.removeEventListener('scroll', handleScroll);
-    }
-
     const container = document.getElementById('search-results');
-    data.forEach(service => {
-      container.insertAdjacentHTML('beforeend', createServiceCard(service));
-    });
 
-    offset += limit;
+    if (data.length === 0) {
+      if (reset) {
+        noResultsMessage.style.display = 'block';
+      }
+      window.removeEventListener('scroll', handleScroll);
+    } else {
+      data.forEach(service => {
+        container.insertAdjacentHTML('beforeend', createServiceCard(service));
+      });
+      offset += limit;
+    }
   } catch (e) {
     console.error("Failed to load services", e);
   } finally {
@@ -77,6 +82,7 @@ async function loadFilteredServices(reset = false) {
     document.getElementById('loader').style.display = 'none';
   }
 }
+
 
 function handleScroll() {
   if (!hasSearched) return;
