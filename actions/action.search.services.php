@@ -58,7 +58,9 @@ if ($query !== '') {
   $countStmt->execute();
   
   if ($countStmt->fetchColumn() == 0) {
-    $baseSql .= ' OR s.title LIKE :fallback';
+    $baseSql .= ' OR s.title LIKE :fallback 
+                OR s.description LIKE :fallback 
+                OR u.name LIKE :fallback';
     $params[':fallback'] = '%' . $query . '%';
   }
 }
