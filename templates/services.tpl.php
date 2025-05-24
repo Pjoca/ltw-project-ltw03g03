@@ -22,9 +22,7 @@
     </div>
   </div>
 
-  <script>
-    const userId = <?= json_encode($_SESSION['user_id']) ?>;
-  </script>
+  <script>const userId = <?= json_encode($_SESSION['user_id']) ?>;</script>
   <script src="/../js/load.services.js" defer></script>
 <?php } ?>
 
@@ -97,7 +95,12 @@
     </div>
 
   <form action="/../actions/action.edit.service.php" method="POST" enctype="multipart/form-data">
+<<<<<<< HEAD
+<input type="hidden" name="service_id" value="<?= htmlspecialchars($service['service_id'] ?? $service['id']) ?>">
+<input type="hidden" name="original_title" value="<?= htmlspecialchars($service['title']) ?>">
+=======
     <input type="hidden" name="original_title" value="<?= htmlspecialchars($service['title']) ?>">
+>>>>>>> main
 
     <div>
       <label for="title">Title:</label>
