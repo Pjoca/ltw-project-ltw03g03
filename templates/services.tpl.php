@@ -85,6 +85,71 @@
 
 <?php } ?>
 
+<?php function draw_edit_service(array $service) { ?>
+
+    <div class="back-nav">
+      <a href="/../pages/home.php" class="nav-button"> Home </a>
+      <a href="/../pages/profile.php" class="nav-button"> Profile </a>
+      <a href="/../pages/my.services.php" class="nav-button"> My Services </a>
+      <a href="/../pages/search.php" class="nav-button"> Search </a>
+      <a href="/../pages/messages.php" class="nav-button"> Messages </a>
+      <a href="logout.php"class="nav-button"> Logout</a>
+    </div>
+
+  <form action="/../actions/action.edit.service.php" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="original_title" value="<?= htmlspecialchars($service['title']) ?>">
+
+    <div>
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" value="<?= htmlspecialchars($service['title']) ?>" required>
+    </div>
+
+    <div>
+      <label for="description">Description:</label>
+      <textarea id="description" name="description" required><?= htmlspecialchars($service['description']) ?></textarea>
+    </div>
+
+    <div>
+      <label for="category_id">Category:</label>
+      <select id="category_id" name="category_id" required>
+        <option value="" disabled>Select a category</option>
+        <option value="1" <?= $service['category_id'] == 1 ? 'selected' : '' ?>>Web Development</option>
+        <option value="2" <?= $service['category_id'] == 2 ? 'selected' : '' ?>>Graphic Design</option>
+        <option value="3" <?= $service['category_id'] == 3 ? 'selected' : '' ?>>Writing</option>
+        <option value="4" <?= $service['category_id'] == 4 ? 'selected' : '' ?>>Marketing</option>
+        <option value="5" <?= $service['category_id'] == 5 ? 'selected' : '' ?>>Photography</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="price">Price:</label>
+      <input type="number" id="price" name="price" step="0.01" value="<?= htmlspecialchars($service['price']) ?>" required>
+    </div>
+
+    <div>
+      <label for="delivery_time">Delivery Time (days):</label>
+      <input type="number" id="delivery_time" name="delivery_time" value="<?= htmlspecialchars($service['delivery_time']) ?>" required>
+    </div>
+
+    <?php if (!empty($service['media'])): ?>
+      <div>
+        <label for="current_image">Current Image:</label>
+        <img src="<?= htmlspecialchars($service['media']) ?>" alt="Current image" style="max-width: 300px;">
+      </div>
+    <?php endif; ?>
+
+    <div>
+      <label for="media">Change Image (optional):</label>
+      <input type="file" id="media" name="media" accept="image/*">
+    </div>
+
+    <div>
+      <input type="submit" value="Update Service">
+    </div>
+  </form>
+
+<?php } ?>
+
 <?php function draw_search(string $selectedQuery, string $selectedCategory, ?float $selectedPrice, ?int $selectedDelivery, array $categories, array $services) { ?>
 
     <div class="back-nav">
