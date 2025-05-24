@@ -72,7 +72,7 @@ CREATE TABLE Reviews (
 
 -- Insert users
 INSERT INTO Users (name, username, password, email, role) VALUES
-('Alice Johnson', 'alicej', 'hashedpassword1', 'alice@example.com', 'client'),
+('Alice Johnson', 'alicej', '1234', 'alice@example.com', 'client'),
 ('Bob Smith', 'bobsmith', 'hashedpassword2', 'bob@example.com', 'freelancer'),
 ('Charlie Brown', 'charlieadmin', 'hashedpassword3', 'charlie@example.com', 'admin'),
 ('Peter Parker', 'notSpiderman', 'ilovemj', 'ihatejjj@example.com', 'freelancer');

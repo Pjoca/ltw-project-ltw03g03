@@ -43,5 +43,5 @@
 
 ## Credentials
 
-- admin/p4s5w0rd ( Mudar )
-- johndoe/1234 ( Mudar )
+- **Basic Account**: alicej/1234
+- **Admin**: charlieadmin/hashedpassword3
