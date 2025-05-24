@@ -84,8 +84,19 @@
 <?php } ?>
 
 <?php function draw_edit_service(array $service) { ?>
+
+    <div class="back-nav">
+      <a href="/../pages/home.php" class="nav-button"> Home </a>
+      <a href="/../pages/profile.php" class="nav-button"> Profile </a>
+      <a href="/../pages/my.services.php" class="nav-button"> My Services </a>
+      <a href="/../pages/search.php" class="nav-button"> Search </a>
+      <a href="/../pages/messages.php" class="nav-button"> Messages </a>
+      <a href="logout.php"class="nav-button"> Logout</a>
+    </div>
+
   <form action="/../actions/action.edit.service.php" method="POST" enctype="multipart/form-data">
-    <input type="hidden" name="original_title" value="<?= htmlspecialchars($service['title']) ?>">
+<input type="hidden" name="service_id" value="<?= htmlspecialchars($service['service_id'] ?? $service['id']) ?>">
+<input type="hidden" name="original_title" value="<?= htmlspecialchars($service['title']) ?>">
 
     <div>
       <label for="title">Title:</label>
@@ -136,9 +147,6 @@
     </div>
   </form>
 
-    <div class="back-nav">
-      <a href="/../pages/my.services.php" class="nav-button"> My Services </a>
-  </div>
 <?php } ?>
 
 <?php function draw_search(string $selectedQuery, string $selectedCategory, ?float $selectedPrice, ?int $selectedDelivery, array $categories, array $services) { ?>
