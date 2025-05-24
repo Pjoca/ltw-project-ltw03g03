@@ -39,7 +39,7 @@ if ($mediaPath !== null) {
   $stmt = $db->prepare('
     UPDATE Services
     SET title = ?, description = ?, category_id = ?, price = ?, delivery_time = ?, media = ?
-    WHERE title = ? AND user_id = ?
+    WHERE id = ? AND user_id = ?
   ');
 
   $stmt->execute([
@@ -49,7 +49,7 @@ if ($mediaPath !== null) {
     $_POST['price'],
     $_POST['delivery_time'],
     $mediaPath,
-    $_POST['original_title'],
+    $_POST['service_id'],  
     $_SESSION['user_id']
   ]);
 } 
@@ -58,7 +58,7 @@ else {
   $stmt = $db->prepare('
     UPDATE Services
     SET title = ?, description = ?, category_id = ?, price = ?, delivery_time = ?
-    WHERE title = ? AND user_id = ?
+    WHERE id = ? AND user_id = ?
   ');
 
   $stmt->execute([
@@ -67,9 +67,10 @@ else {
     $_POST['category_id'],
     $_POST['price'],
     $_POST['delivery_time'],
-    $_POST['original_title'],
+    $_POST['service_id'],  
     $_SESSION['user_id']
   ]);
 }
 
 header('Location: /../pages/my.services.php');
+?>
