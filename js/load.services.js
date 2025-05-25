@@ -29,6 +29,12 @@ function createServiceCard(service, postedBy = null) {
           <button class="edit-btn" onclick="editService('${service.title}')">Edit</button>
           <button class="delete-btn" onclick="deleteService('${service.title}')">Delete</button>
         </div>` : ''}
+      ${!isOwner ? `
+        <div class="service-actions">
+          <a class="message-btn" href="/pages/messages.php?user_id=${service.user_id}&service_id=${service.id}">
+            Ask a Question
+          </a>
+      </div>` : ''}
     </article>
   `;
 }
