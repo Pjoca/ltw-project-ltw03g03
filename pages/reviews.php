@@ -37,14 +37,14 @@ $reviews = $stmt->fetchAll();
 
 draw_header('Reviews for ' . htmlspecialchars($service['title']));
 ?>
-
-<div class="back-nav">
-  <a href="/pages/profile.php">Profile</a>
-  <a href="/pages/home.php">Home</a>
-</div>
+      <a href="/../pages/home.php" class="nav-button">Home</a>
+      <a href="/../pages/profile.php" class="nav-button">Profile</a>
+      <a href="/../pages/my.services.php" class="nav-button">My Services</a>
+      <a href="/../pages/search.php" class="nav-button">Search</a>
+      <a href="/../pages/messages.php" class="nav-button">Messages</a>
+      <a href="/../pages/logout.php" class="nav-button">Logout</a>
 
 <div class="reviews-container">
-  <h1>Reviews for <?= htmlspecialchars($service['title']) ?></h1>
   <p class="freelancer">By <?= htmlspecialchars($service['freelancer_name']) ?></p>
   
   <?php if (empty($reviews)): ?>

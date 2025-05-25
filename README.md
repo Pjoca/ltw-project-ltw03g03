@@ -26,9 +26,9 @@
 - [x] Leave ratings and reviews for completed services.
 
 **Admins:**
-- [ ] Elevate a user to admin status.
+- [x] Elevate a user to admin status.
 - [ ] Introduce new service categories and other pertinent entities.
-- [ ] Oversee and ensure the smooth operation of the entire system.
+- [x] Oversee and ensure the smooth operation of the entire system.
 
 **Extra:**
 - [x] **Efficient Service Display:** Services are loaded in pages to optimize performance and user experience, avoiding the burden of loading all available services at once.
