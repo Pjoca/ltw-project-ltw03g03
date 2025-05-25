@@ -22,8 +22,8 @@
 **Clients:**
 - [x] Browse services using filters like category, price, and rating.
 - [x] Engage with freelancers to ask questions or request custom orders.
-- [ ] Hire freelancers and proceed to checkout (simulate payment process).
-- [ ] Leave ratings and reviews for completed services.
+- [x] Hire freelancers and proceed to checkout (simulate payment process).
+- [x] Leave ratings and reviews for completed services.
 
 **Admins:**
 - [ ] Elevate a user to admin status.
