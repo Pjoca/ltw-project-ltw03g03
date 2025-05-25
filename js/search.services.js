@@ -23,6 +23,12 @@ function createServiceCard(service) {
       <p><strong>Delivery time:</strong> ${escapeHtml(service.delivery_time)} days</p>
       <p>${escapeHtml(service.description)}</p>
       ${service.media ? `<div class="service-media"><img src="${escapeHtml(service.media)}" /></div>` : ''}
+
+      <div class="service-actions">
+        <a class="message-btn" href="/pages/messages.php?user_id=${service.user_id}&service_id=${service.id}">
+          Ask a Question
+        </a>
+      </div>
     </article>
   `;
 }

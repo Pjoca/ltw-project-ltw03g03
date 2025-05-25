@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // --- Rate Limiting Configuration ---
-const RATE_LIMIT_WINDOW = 60; // seconds (e.g., 60 seconds)
+const RATE_LIMIT_WINDOW = 10; // seconds (e.g., 60 seconds)
 const MAX_MESSAGES_PER_WINDOW = 5; // maximum messages allowed in that window
 
 $currentTime = time();

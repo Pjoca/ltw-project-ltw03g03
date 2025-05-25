@@ -95,6 +95,8 @@ $totalResults = $countStmt->fetchColumn();
 // Main query
 $servicesSql = '
   SELECT
+    s.id,         
+    s.user_id,          
     s.title,
     s.description,
     s.price,
