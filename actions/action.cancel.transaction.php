@@ -32,7 +32,7 @@ try {
     }
 
     // Redirect to transaction list with success message
-    header('Location: /pages/messages.php?success=Transaction+cancelled');
+    header('Location: /pages/home.php?success=Transaction+cancelled');
     exit();
 } catch (Exception $e) {
     error_log('Cancel error: ' . $e->getMessage());
