@@ -348,3 +348,171 @@
       background: #f0f0f0;
     }
     
+/* Transaction Cards */
+.transaction-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+
+.transaction-card.status-pending {
+  border-left: 4px solid #FFC107;
+  background-color: #FFF9E6;
+}
+
+.transaction-card.status-completed {
+  border-left: 4px solid #4CAF50;
+  background-color: #E8F5E9;
+}
+
+.transaction-card.status-cancelled {
+  border-left: 4px solid #F44336;
+  background-color: #FFEBEE;
+}
+
+/* Review Form */
+.review-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group select, 
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.form-group textarea {
+  min-height: 100px;
+}
+
+/* Buttons */
+.pay-btn {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.cancel-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.review-btn {
+  background-color: #2196F3;
+  color: white;
+}
+
+.error-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    border: 1px solid #f44336;
+    border-radius: 5px;
+    background-color: #ffebee;
+    text-align: center;
+}
+
+.error-container h2 {
+    color: #f44336;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 8px 16px;
+    background-color: #2196F3;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.transaction-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.transaction-details p {
+    margin: 10px 0;
+    padding: 8px;
+    background: #f9f9f9;
+    border-left: 3px solid #4CAF50;
+}
+
+.transaction-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.transaction-details p {
+    margin: 10px 0;
+    padding: 10px;
+    background: #f9f9f9;
+    border-left: 3px solid #4CAF50;
+}
+
+.transaction-actions {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 10px;
+}
+
+.cancel-button, .review-button {
+    padding: 10px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.cancel-button {
+    background-color: #f44336;
+    color: white;
+}
+
+.review-button {
+    background-color: #2196F3;
+    color: white;
+}
+
+.error-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #f44336;
+    border-radius: 5px;
+    background-color: #ffebee;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}

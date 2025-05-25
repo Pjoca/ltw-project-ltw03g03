@@ -28,7 +28,13 @@ function createServiceCard(service) {
         <a class="message-btn" href="/pages/messages.php?user_id=${service.user_id}&service_id=${service.id}">
           Ask a Question
         </a>
-      </div>
+        <button class="buy-btn" onclick="initiatePurchase(${service.id}, ${service.user_id})">
+          Buy Now
+        </button>
+          <a class="reviews-btn" href="/pages/reviews.php?service_id=${service.id}">
+            View Reviews 
+          </a>
+      </div>    
     </article>
   `;
 }
@@ -139,3 +145,29 @@ window.addEventListener('DOMContentLoaded', () => {
     loadFilteredServices();
   });
 });
+
+async function initiatePurchase(serviceId, freelancerId) {
+  try {
+    const response = await fetch('/actions/action.create.transaction.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        service_id: serviceId,
+        freelancer_id: freelancerId
+      }),
+      credentials: 'include' // For session cookie
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error || 'Transaction failed');
+    }
+
+    const result = await response.json();
+    window.location.href = `/pages/transaction.php?id=${result.transaction_id}`;
+    
+  } catch (error) {
+    console.error('Purchase error:', error);
+    alert(error.message);
+  }
+}

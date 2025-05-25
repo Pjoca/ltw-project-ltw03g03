@@ -10,6 +10,8 @@ function escapeHtml(text) {
 
 function createServiceCard(service, postedBy = null) {
   const isOwner = postedBy === 'You';
+  const hasReviews = service.review_count > 0; // Ensure your API returns review_count
+  
   return `
     <article class="service-card">
       <div class="service-header">
@@ -17,6 +19,10 @@ function createServiceCard(service, postedBy = null) {
           <h3>${escapeHtml(postedBy ?? service.poster_name ?? 'You')}</h3>
           <span class="date">${new Date(service.created_at).toLocaleDateString()}</span>
         </div>
+        ${hasReviews ? `
+          <div class="rating-badge">
+            ${service.average_rating?.toFixed(1) || '5.0'} ★
+          </div>` : ''}
       </div>
       <h4>${escapeHtml(service.title)}</h4>
       <p><strong>Category:</strong> ${escapeHtml(service.category)}</p>
@@ -24,17 +30,23 @@ function createServiceCard(service, postedBy = null) {
       <p><strong>Delivery time:</strong> ${escapeHtml(service.delivery_time)} days</p>
       <p>${escapeHtml(service.description)}</p>
       ${service.media ? `<div class="service-media"><img src="${escapeHtml(service.media)}" /></div>` : ''}
-      ${isOwner ? `
-        <div class="service-actions">
+      
+      <div class="service-actions">
+        ${isOwner ? `
           <button class="edit-btn" onclick="editService('${service.title}')">Edit</button>
           <button class="delete-btn" onclick="deleteService('${service.title}')">Delete</button>
-        </div>` : ''}
-      ${!isOwner ? `
-        <div class="service-actions">
+        ` : `
           <a class="message-btn" href="/pages/messages.php?user_id=${service.user_id}&service_id=${service.id}">
-            Ask a Question
+            Ask Question
           </a>
-      </div>` : ''}
+          <button class="buy-btn" onclick="initiatePurchase(${service.id}, ${service.user_id})">
+            Buy Now
+          </button>
+            <a class="reviews-btn" href="/pages/reviews.php?service_id=${service.id}">
+              View Reviews 
+            </a>
+        `}
+      </div>
     </article>
   `;
 }
@@ -123,4 +135,30 @@ async function deleteService(title) {
 
 function editService(title) {
   window.location.href = `/../edit/service.edit.php?title=${encodeURIComponent(title)}`;
+}
+
+async function initiatePurchase(serviceId, freelancerId) {
+  try {
+    const response = await fetch('/actions/action.create.transaction.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        service_id: serviceId,
+        freelancer_id: freelancerId
+      }),
+      credentials: 'include' // For session cookie
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error || 'Transaction failed');
+    }
+
+    const result = await response.json();
+    window.location.href = `/pages/transaction.php?id=${result.transaction_id}`;
+    
+  } catch (error) {
+    console.error('Purchase error:', error);
+    alert(error.message);
+  }
 }
