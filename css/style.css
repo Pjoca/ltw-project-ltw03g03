@@ -143,3 +143,17 @@ footer {
   font-size: 13px;
   color: var(--text-muted);
 }
+
+.you-button {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  margin-left: 1rem;
+  background-color: #888;
+  color: white;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: default;
+  border: none;
+  text-align: center;
+}
