@@ -56,13 +56,17 @@
 
 <?php function draw_home() { ?>
   <div class="homepage-container">
-  <div class="back-nav">
-    <a href="/../pages/profile.php" class="nav-button"> Profile </a>
-    <a href="/../pages/my.services.php" class="nav-button"> My Services </a>
-    <a href="/../pages/search.php" class="nav-button"> Search </a>
-    <a href="/../pages/messages.php" class="nav-button"> Messages </a>
-    <a href="logout.php"class="nav-button"> Logout</a>
-  </div>
+    <div class="back-nav">
+      <a href="/../pages/profile.php" class="nav-button">Profile</a>
+      <a href="/../pages/my.services.php" class="nav-button">My Services</a>
+      <a href="/../pages/search.php" class="nav-button">Search</a>
+      <a href="/../pages/messages.php" class="nav-button">Messages</a>
+      <a href="/../pages/logout.php" class="nav-button">Logout</a>
+
+      <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') : ?>
+        <a href="/../pages/manage_users.php" class="nav-button admin-button">Manage Roles</a>
+      <?php endif; ?>
+    </div>
 
     <section class="homepage-banner">
       <h2>Available Services</h2>
