@@ -84,6 +84,10 @@ if ($otherUserId) { // Use $otherUserId as the active user for displaying messag
 }
 
 draw_header('Messages');
+if (isset($_SESSION['error_message'])) {
+    echo '<div style="color: red; text-align: center; margin-top: 10px;">' . htmlspecialchars($_SESSION['error_message']) . '</div>';
+    unset($_SESSION['error_message']); // Clear the message after displaying it
+}
 draw_messages($conversations, $messages, $activeUserId);
 draw_footer();
 ?>
