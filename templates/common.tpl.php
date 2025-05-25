@@ -78,10 +78,77 @@
       <!-- Services will be dynamically loaded here -->
     </section>
 
-    <div id="loader" style="display: none; text-align: center; padding: 1rem;">
+    <div id="loader">
       <div class="spinner"></div>
     </div>
   </div>
 
   <script src="/../js/load.services.js" defer></script>
+<?php } ?>
+
+<?php function draw_messages(array $conversations, array $messages = [], ?int $activeUserId = null) { ?>
+  <div class="back-nav">
+    <a href="/../pages/profile.php" class="nav-button"> Profile </a>
+    <a href="/../pages/home.php" class="nav-button"> Home </a>
+    <a href="/../pages/my.services.php" class="nav-button"> My Services </a>
+    <a href="/../pages/search.php" class="nav-button"> Search </a>
+    <a href="logout.php" class="nav-button"> Logout</a>
+  </div>
+
+  <div class="messages-container">
+    <div class="conversation-list">
+      <h2>Conversations</h2>
+      <?php if (empty($conversations)): ?>
+        <p>No conversations yet.</p>
+      <?php else: ?>
+        <ul>
+          <?php foreach ($conversations as $conv): ?>
+            <li class="<?= $conv['user_id'] == $activeUserId ? 'active' : '' ?>">
+              <a href="messages.php?user_id=<?= $conv['user_id'] ?>">
+                <strong><?= htmlspecialchars($conv['name']) ?></strong>
+                <p><?= htmlspecialchars($conv['latest_message']) ?></p>
+                <small><?= date('M j, Y', strtotime($conv['sent_at'])) ?></small>
+              </a>
+            </li>
+          <?php endforeach; ?>
+        </ul>
+      <?php endif; ?>
+    </div>
+
+    <?php if ($activeUserId): ?>
+    <div class="message-view">
+      <div class="message-thread">
+        <?php if (empty($messages)): ?>
+          <p>No messages in this conversation.</p>
+        <?php else: ?>
+          <?php foreach ($messages as $msg): ?>
+            <div class="message <?= $msg['sender_id'] == $_SESSION['user_id'] ? 'sent' : 'received' ?>">
+              <div class="message-header">
+                <strong><?= htmlspecialchars($msg['sender_name']) ?></strong>
+                <span><?= date('g:i a', strtotime($msg['sent_at'])) ?></span>
+              </div>
+              <p><?= htmlspecialchars($msg['message']) ?></p>
+            </div>
+          <?php endforeach; ?>
+        <?php endif; ?>
+      </div>
+
+      <script>
+        // JavaScript to scroll to the bottom of the message thread
+        document.addEventListener('DOMContentLoaded', function() {
+          const messageThread = document.querySelector('.message-thread');
+          if (messageThread) {
+            messageThread.scrollTop = messageThread.scrollHeight;
+          }
+        });
+      </script>
+
+      <form class="message-form" method="POST" action="/actions/action.send.message.php">
+        <input type="hidden" name="receiver_id" value="<?= $activeUserId ?>">
+        <textarea name="message" required placeholder="Type your message..."></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+    <?php endif; ?>
+  </div>
 <?php } ?>

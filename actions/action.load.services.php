@@ -9,12 +9,14 @@ $limit = 3;
 
 $stmt = $db->prepare('
   SELECT 
+    Services.id,                 -- Add Services.id (important for service_id in URL)
     Services.title,
     Services.description,
     Services.price,
     Services.delivery_time,
     Services.media,
     Services.created_at,
+    Services.user_id,            -- IMPORTANT: Add Services.user_id here
     Categories.name AS category,
     Users.name AS poster_name
   FROM Services
@@ -32,3 +34,4 @@ $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 header('Content-Type: application/json');
 echo json_encode($services);
+?>

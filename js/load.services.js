@@ -29,6 +29,12 @@ function createServiceCard(service, postedBy = null) {
           <button class="edit-btn" onclick="editService('${service.title}')">Edit</button>
           <button class="delete-btn" onclick="deleteService('${service.title}')">Delete</button>
         </div>` : ''}
+      ${!isOwner ? `
+        <div class="service-actions">
+          <a class="message-btn" href="/pages/messages.php?user_id=${service.user_id}&service_id=${service.id}">
+            Ask a Question
+          </a>
+      </div>` : ''}
     </article>
   `;
 }
@@ -71,7 +77,9 @@ function handleScroll() {
     if (scrollY + innerHeight >= offsetHeight - 20) {
       if (document.getElementById('service-list')) {
         loadServices('/../actions/action.load.services.php', 'service-list');
-      } else if (document.getElementById('my-service-list')) {
+      } 
+      
+      else if (document.getElementById('my-service-list')) {
         loadServices('/../actions/action.load.my.services.php', 'my-service-list', 'You');
       }
     }

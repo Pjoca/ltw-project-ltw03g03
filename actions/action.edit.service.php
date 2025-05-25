@@ -73,3 +73,5 @@ else {
 }
 
 header('Location: /../pages/my.services.php');
+exit();
+?>

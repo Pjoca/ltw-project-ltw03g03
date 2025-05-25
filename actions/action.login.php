@@ -21,21 +21,6 @@ if ($user && password_verify($password, $user['password'])) {
     header('Location: ../pages/profile.php');
 }
 
-// Se por acaso dermos reset á database, temos de dar hash às passes outra vez, se não, não dá para fazer login
-/*
-else if ($user && $password == $user['password']) { 
-    $hashed = password_hash($password, PASSWORD_DEFAULT);
-    $update = $db->prepare("UPDATE Users SET password = :pwd WHERE id = :id");
-    $update->execute([
-        ':pwd' => $hashed,
-        ':id' => $user['id']
-    ]);
-    $_SESSION['user_id'] = $user['id'];
-    $_SESSION['role'] = $user['role'];
-    header('Location: ../pages/profile.php');
-}
-*/
-
 else {
     header('Location: ../pages/login.php?error=1');
 }

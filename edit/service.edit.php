@@ -21,6 +21,7 @@ $stmt = $db->prepare('SELECT * FROM Services WHERE title = ? AND user_id = ?');
 $stmt->execute([$title, $_SESSION['user_id']]);
 $service = $stmt->fetch();
 
+$service['service_id'] = $service['id'];
 if (!$service) {
   die('Service not found or not yours');
 }

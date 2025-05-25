@@ -2,6 +2,8 @@
     <div class="back-nav">
       <a href="/../pages/home.php" class="nav-button"> Home </a>
       <a href="/../pages/profile.php" class="nav-button"> Profile </a>
+      <a href="/../pages/search.php" class="nav-button"> Search </a>
+      <a href="/../pages/messages.php" class="nav-button"> Messages </a>
       <a href="logout.php"class="nav-button"> Logout</a>
     </div>
 
@@ -20,14 +22,21 @@
     </div>
   </div>
 
-  <script>
-    const userId = <?= json_encode($_SESSION['user_id']) ?>;
-  </script>
+  <script>const userId = <?= json_encode($_SESSION['user_id']) ?>;</script>
   <script src="/../js/load.services.js" defer></script>
 <?php } ?>
 
 
 <?php function draw_create_service() { ?>
+
+    <div class="back-nav">
+      <a href="/../pages/home.php" class="nav-button"> Home </a>
+      <a href="/../pages/profile.php" class="nav-button"> Profile </a>
+      <a href="/../pages/my.services.php" class="nav-button"> My Services </a>
+      <a href="/../pages/search.php" class="nav-button"> Search </a>
+      <a href="/../pages/messages.php" class="nav-button"> Messages </a>
+      <a href="logout.php"class="nav-button"> Logout</a>
+    </div>
 
 <form action="../actions/action.submit.service.php" method="POST" enctype="multipart/form-data">
   <div>
@@ -72,15 +81,22 @@
   <button type="submit" class="submit-button">Submit Service</button>
 </form>
 
-<div class="back-nav">
-  <a href="/../pages/home.php" class="nav-button">Home</a>
-</div>
-
 <?php } ?>
 
 <?php function draw_edit_service(array $service) { ?>
+
+    <div class="back-nav">
+      <a href="/../pages/home.php" class="nav-button"> Home </a>
+      <a href="/../pages/profile.php" class="nav-button"> Profile </a>
+      <a href="/../pages/my.services.php" class="nav-button"> My Services </a>
+      <a href="/../pages/search.php" class="nav-button"> Search </a>
+      <a href="/../pages/messages.php" class="nav-button"> Messages </a>
+      <a href="logout.php"class="nav-button"> Logout</a>
+    </div>
+
   <form action="/../actions/action.edit.service.php" method="POST" enctype="multipart/form-data">
-    <input type="hidden" name="original_title" value="<?= htmlspecialchars($service['title']) ?>">
+<input type="hidden" name="service_id" value="<?= htmlspecialchars($service['service_id'] ?? $service['id']) ?>">
+<input type="hidden" name="original_title" value="<?= htmlspecialchars($service['title']) ?>">
 
     <div>
       <label for="title">Title:</label>
@@ -131,45 +147,58 @@
     </div>
   </form>
 
-    <div class="back-nav">
-      <a href="/../pages/my.services.php" class="nav-button"> My Services </a>
-  </div>
 <?php } ?>
 
-<?php
-function draw_search() { ?>
+<?php function draw_search(string $selectedQuery, string $selectedCategory, ?float $selectedPrice, ?int $selectedDelivery, array $categories, array $services) { ?>
+
+    <div class="back-nav">
+      <a href="/../pages/home.php" class="nav-button"> Home </a>
+      <a href="/../pages/profile.php" class="nav-button"> Profile </a>
+      <a href="/../pages/my.services.php" class="nav-button"> My Services </a>
+      <a href="/../pages/messages.php" class="nav-button"> Messages </a>
+      <a href="logout.php"class="nav-button"> Logout</a>
+    </div>
+  
     <section class="search-filters-section">
-      <form id="filter-form" action="search.php" method="GET" class="search-filter-form">
+      <form id="filter-form" action="search.php" method="GET" class="search-form">
 
-        <label class="filter-label full-width">
-          Search:
+        <div class="form-group">
+          <label for="query">Search:</label>
           <input type="text" name="query" id="search-query" placeholder="e.g. photography, website, Bob Smith" value="<?= htmlspecialchars($selectedQuery) ?>">
-        </label>
+        </div>
 
-        <label class="filter-label">
-          Category:
+        <div class="form-group">
+          <label for="category">Category:</label>
           <select name="category" id="category" class="filter-select">
-            <option value="">All</option>
+            <option value="">All</option> 
             <?php foreach ($categories as $c): ?>
               <option value="<?= htmlspecialchars($c->name) ?>" <?= ($selectedCategory === $c->name) ? 'selected' : '' ?>>
-                <?= htmlspecialchars($c->name) ?>
+              <?= htmlspecialchars($c->name) ?>
               </option>
             <?php endforeach; ?>
           </select>
-        </label>
+        </div>
 
-        <label class="filter-label">
-          Max&nbsp;Price:
+        <div class="form-group">
+          <label for="price">Max Price:</label>
           <input type="number" name="price" id="price" min="0" placeholder="e.g. 100" class="filter-input" value="<?= htmlspecialchars((string)$selectedPrice) ?>">
-        </label>
+        </div>
 
-        <label class="filter-label">
-          Max&nbsp;Delivery&nbsp;(days):
+        <div class="form-group">
+          <label for="delivery">Max Delivery (days):</label>
           <input type="number" name="delivery" id="delivery" min="1" placeholder="e.g. 7" class="filter-input" value="<?= htmlspecialchars((string)$selectedDelivery) ?>">
-        </label>
+        </div>
 
-        <button type="submit" class="apply-filters-button">Apply Filters</button>
-
+        <button type="submit" class="filter-button">Apply Filters</button>
       </form>
     </section>
+    
+<section id="search-results" class="service-list">
+  <!-- Filtered services will be inserted here -->
+</section>
+<p id="no-results-message">No results available.</p>
+<div id="pagination-controls" class="pagination-controls"></div>
+
+<script src="/../js/search.services.js" defer></script>
+
 <?php } ?>
